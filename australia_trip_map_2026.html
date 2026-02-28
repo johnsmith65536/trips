@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>澳大利亚自驾路线图 | 大洋路×塔斯马尼亚 2026五一</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'SimHei', sans-serif;
+  background: #eaf4fb;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #0077b6 0%, #00b4d8 60%, #90e0ef 100%);
+  color: white;
+  padding: 36px 40px;
+  border-radius: 18px;
+  text-align: center;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 32px rgba(0,119,182,0.28);
+}
+.hero h1 { font-size: 2em; font-weight: 700; margin-bottom: 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+.hero .subtitle { font-size: 1em; opacity: 0.92; letter-spacing: 1px; }
+
+/* Stats bar */
+.stats-bar { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+.stat-card {
+  flex: 1; min-width: 140px;
+  background: white; padding: 14px 16px;
+  border-radius: 12px; text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-top: 4px solid;
+}
+.stat-card.c1 { border-color: #0077b6; }
+.stat-card.c2 { border-color: #0096c7; }
+.stat-card.c3 { border-color: #f77f00; }
+.stat-card.c4 { border-color: #2d6a4f; }
+.stat-card.c5 { border-color: #c1121f; }
+.stat-card .icon { font-size: 1.7em; margin-bottom: 4px; }
+.stat-card .label { font-size: 0.75em; color: #888; margin-top: 2px; }
+.stat-card .value { font-size: 1em; font-weight: 700; color: #2c3e50; }
+
+/* Section */
+.section-box {
+  background: white; border-radius: 16px;
+  padding: 24px; margin-bottom: 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+.section-title {
+  font-size: 1.35em; font-weight: 700;
+  margin-bottom: 18px; padding-bottom: 8px;
+  border-bottom: 3px solid #0077b6;
+  color: #0077b6;
+}
+
+/* Map */
+.map-svg { width: 100%; height: auto; display: block; border-radius: 10px; }
+
+/* Legend */
+.legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.84em; color: #555; }
+.legend-dot { width: 13px; height: 13px; border-radius: 50%; }
+.legend-seg { width: 32px; height: 3px; border-radius: 2px; }
+.legend-seg.dashed {
+  background: none !important;
+  border-bottom: 3px dashed;
+}
+
+/* Timeline grid */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+.day-card { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.day-card-header {
+  padding: 12px 16px; color: white;
+  display: flex; align-items: center; gap: 12px;
+}
+.day-card-header.h-transit  { background: linear-gradient(135deg,#6c757d,#adb5bd); }
+.day-card-header.h-melb     { background: linear-gradient(135deg,#0077b6,#0096c7); }
+.day-card-header.h-gor      { background: linear-gradient(135deg,#0096c7,#00b4d8); }
+.day-card-header.h-penguin  { background: linear-gradient(135deg,#f77f00,#fca311); }
+.day-card-header.h-hobart   { background: linear-gradient(135deg,#2d6a4f,#40916c); }
+.day-card-header.h-arthur   { background: linear-gradient(135deg,#1b4332,#2d6a4f); }
+.day-card-header.h-freycinet{ background: linear-gradient(135deg,#40916c,#52b788); }
+.day-card-header.h-cradle   { background: linear-gradient(135deg,#1e6091,#2d8abf); }
+.day-num {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.15em; flex-shrink: 0;
+}
+.day-info { flex: 1; }
+.day-date { font-size: 0.72em; opacity: 0.88; }
+.day-location { font-weight: 700; font-size: 1em; }
+.day-card-body { background: white; padding: 12px 16px; }
+.activity-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 5px; font-size: 0.86em; color: #444;
+}
+.activity-icon { flex-shrink: 0; width: 18px; }
+.drive-info {
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 0.78em; color: #888;
+}
+
+/* Distance table */
+.dist-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.dist-table th {
+  background: #0077b6; color: white;
+  padding: 10px 12px; text-align: left;
+}
+.dist-table th:first-child { border-radius: 8px 0 0 0; }
+.dist-table th:last-child { border-radius: 0 8px 0 0; }
+.dist-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; }
+.dist-table tr:nth-child(even) td { background: #f8f9fa; }
+.dist-table tr.total td { background: #e3f4fd; font-weight: bold; }
+.dist-table .day-label { font-weight: bold; }
+.d-gor { color: #0096c7; }
+.d-penguin { color: #f77f00; }
+.d-tas { color: #2d6a4f; }
+
+/* Warning banner */
+.warn-box {
+  background: #fff3cd; border-left: 4px solid #f77f00;
+  border-radius: 8px; padding: 12px 16px;
+  font-size: 0.86em; color: #7a5800;
+  margin-top: 14px;
+}
+.warn-box strong { color: #c45c00; }
+
+footer {
+  text-align: center; padding: 24px 0 10px;
+  color: #aaa; font-size: 0.82em;
+}
+
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.4em; }
+  .stats-bar { flex-direction: column; }
+  .timeline-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <h1>🌊 大洋路 × 塔斯马尼亚自驾深度游</h1>
+  <div class="subtitle">2026年4月25日 ～ 5月5日 &nbsp;|&nbsp; 11天情侣版 &nbsp;|&nbsp; 深圳出发</div>
+</header>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stat-card c1"><div class="icon">✈️</div><div class="value">深圳 → 墨尔本</div><div class="label">南航广州直飞 约10.5h</div></div>
+  <div class="stat-card c2"><div class="icon">🌊</div><div class="value">大洋路 3天</div><div class="label">托尔博→十二门徒→企鹅岛</div></div>
+  <div class="stat-card c3"><div class="icon">🐧</div><div class="value">企鹅岛 1夜</div><div class="label">小蓝企鹅归巢仪式</div></div>
+  <div class="stat-card c4"><div class="icon">🏔️</div><div class="value">塔斯马尼亚 5天</div><div class="label">霍巴特·亚瑟港·酒杯湾·摇篮山</div></div>
+  <div class="stat-card c5"><div class="icon">💰</div><div class="value">约 ¥45,000～55,000</div><div class="label">两人总预算</div></div>
+</div>
+
+<!-- ── MAP ── -->
+<section class="section-box">
+  <h2 class="section-title">🗺️ 自驾路线地图</h2>
+
+  <svg class="map-svg" viewBox="0 0 920 670" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Arrow markers -->
+      <marker id="arr-blue"   markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#0096c7"/></marker>
+      <marker id="arr-orange" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#f77f00"/></marker>
+      <marker id="arr-green"  markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#2d6a4f"/></marker>
+      <marker id="arr-gray"   markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#adb5bd"/></marker>
+      <marker id="arr-purple" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#7b2d8b"/></marker>
+      <!-- Drop shadow -->
+      <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="1.5" dy="1.5" stdDeviation="2.5" flood-opacity="0.22"/>
+      </filter>
+      <!-- Label background -->
+      <filter id="lbl-bg">
+        <feFlood flood-color="white" flood-opacity="0.88" result="bg"/>
+        <feMerge><feMergeNode in="bg"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- ── Ocean background ── -->
+    <rect x="0" y="0" width="920" height="670" fill="#b8e4f5" rx="12"/>
+
+    <!-- ── Subtle latitude lines ── -->
+    <!-- 38°S -->
+    <line x1="50" y1="115" x2="880" y2="115" stroke="white" stroke-width="0.6" stroke-dasharray="6,8" opacity="0.4"/>
+    <!-- 40°S -->
+    <line x1="50" y1="285" x2="880" y2="285" stroke="white" stroke-width="0.6" stroke-dasharray="6,8" opacity="0.4"/>
+    <!-- 42°S -->
+    <line x1="50" y1="455" x2="880" y2="455" stroke="white" stroke-width="0.6" stroke-dasharray="6,8" opacity="0.4"/>
+
+    <!-- Latitude labels -->
+    <text x="58" y="112" font-size="9" fill="white" opacity="0.55">38°S</text>
+    <text x="58" y="282" font-size="9" fill="white" opacity="0.55">40°S</text>
+    <text x="58" y="452" font-size="9" fill="white" opacity="0.55">42°S</text>
+    <text x="880" y="112" text-anchor="end" font-size="9" fill="white" opacity="0.55">38°S</text>
+    <text x="880" y="282" text-anchor="end" font-size="9" fill="white" opacity="0.55">40°S</text>
+    <text x="880" y="452" text-anchor="end" font-size="9" fill="white" opacity="0.55">42°S</text>
+
+    <!-- Longitude labels -->
+    <text x="147" y="648" text-anchor="middle" font-size="9" fill="white" opacity="0.55">143°E</text>
+    <text x="337" y="648" text-anchor="middle" font-size="9" fill="white" opacity="0.55">145°E</text>
+    <text x="527" y="648" text-anchor="middle" font-size="9" fill="white" opacity="0.55">147°E</text>
+    <text x="717" y="648" text-anchor="middle" font-size="9" fill="white" opacity="0.55">149°E</text>
+
+    <!-- ── Victoria mainland ── -->
+    <!-- Coordinate transform: x = 52 + (lon-142)*95  y = 30 + (lat-37)*95 -->
+    <!-- (using 95px/degree for both axes for cleaner layout) -->
+    <!--
+      lon 142→x=52,  143→147, 144→242, 145→337, 146→432, 147→527, 148→622, 149→717
+      lat 37→y=30,   38→125,  39→220,  40→315,  41→410,  42→505,  43→600
+    -->
+    <polygon points="
+      52,30   880,30   880,230
+      700,210  560,175  490,160
+      450,198  430,215  415,200
+      400,205  390,185  382,165
+      375,110  362,98   340,102
+      317,114  298,128  278,145
+      250,162  218,185  175,175
+      148,172  88,180   52,190
+    " fill="#b5d5a8" stroke="#8ec47a" stroke-width="1.2"/>
+
+    <!-- Port Phillip Bay (blue on top of land) -->
+    <ellipse cx="362" cy="148" rx="28" ry="48" fill="#90d4f0" stroke="#6bbde0" stroke-width="1"/>
+    <!-- Bay label -->
+    <text x="362" y="152" text-anchor="middle" font-size="8" fill="#2775a0" font-style="italic">菲利普湾</text>
+
+    <!-- Phillip Island (small green blob) -->
+    <ellipse cx="378" cy="172" rx="20" ry="7" fill="#b5d5a8" stroke="#8ec47a" stroke-width="1"/>
+
+    <!-- Bass Strait label -->
+    <text x="460" y="268" text-anchor="middle" font-size="14" fill="#5aacd4" font-style="italic" opacity="0.85">巴 斯 海 峡</text>
+    <text x="460" y="285" text-anchor="middle" font-size="10" fill="#5aacd4" font-style="italic" opacity="0.65">Bass Strait</text>
+
+    <!-- ── Tasmania ── -->
+    <!--
+      NW (145.3,40.9)→(363,362), N-ctr(146.8,40.5)→(506,328), NE(148.0,41.0)→(622,368),
+      E(148.3,42.1)→(650,462), SE(147.8,43.4)→(602,572), S(146.4,43.8)→(466,602),
+      SW(145.0,43.4)→(337,572), W(144.6,42.4)→(299,487), WNW(145.3,41.5)→(363,412),
+      bulge(145.6,41.1)→(391,378)
+    -->
+    <polygon points="
+      363,362  506,328  622,368
+      650,462  602,572  466,602
+      337,572  299,487  363,412
+      391,378  363,362
+    " fill="#b5d5a8" stroke="#8ec47a" stroke-width="1.2"/>
+
+    <!-- "VICTORIA" label on mainland -->
+    <text x="600" y="95" text-anchor="middle" font-size="16" fill="#5a8a50" font-weight="bold" letter-spacing="3" opacity="0.7">VICTORIA</text>
+    <!-- "TASMANIA" label on island -->
+    <text x="490" y="490" text-anchor="middle" font-size="14" fill="#5a8a50" font-weight="bold" letter-spacing="2" opacity="0.7">TASMANIA</text>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- ── ROUTES ── -->
+    <!-- ═══════════════════════════════════ -->
+
+    <!-- Day 3: Great Ocean Road — Melbourne → Torquay → Apollo Bay → 12 Apostles → Campbell Port -->
+    <path d="M 337,99 L 298,128 L 278,145 L 250,162 L 218,185 L 175,175 L 148,172"
+          stroke="#0096c7" stroke-width="4" fill="none"
+          marker-end="url(#arr-blue)"
+          stroke-linecap="round" stroke-linejoin="round"
+          filter="url(#shadow)"/>
+
+    <!-- Day 4 morning: Campbell Port → inland → Melbourne (dashed return) -->
+    <path d="M 148,172 C 210,128 280,102 337,99"
+          stroke="#adb5bd" stroke-width="2.5" fill="none"
+          stroke-dasharray="9,6"
+          marker-end="url(#arr-gray)" opacity="0.8"/>
+
+    <!-- Day 4: Melbourne → Phillip Island -->
+    <path d="M 337,99 C 360,128 372,155 378,172"
+          stroke="#f77f00" stroke-width="3.5" fill="none"
+          marker-end="url(#arr-orange)" stroke-linecap="round"/>
+
+    <!-- Day 5: Phillip Island → Melbourne (return, dashed) -->
+    <path d="M 378,172 C 370,148 355,120 337,99"
+          stroke="#adb5bd" stroke-width="2" fill="none"
+          stroke-dasharray="7,5" opacity="0.7"/>
+
+    <!-- Day 5: Melbourne → Hobart FLIGHT (curved purple dashed) -->
+    <path d="M 337,99 C 390,42 500,80 527,520"
+          stroke="#7b2d8b" stroke-width="2.5" fill="none"
+          stroke-dasharray="12,7"
+          marker-end="url(#arr-green)" opacity="0.9"/>
+    <!-- Plane icon on flight path -->
+    <text x="448" y="285" text-anchor="middle" font-size="22" opacity="0.85">✈️</text>
+    <text x="462" y="301" text-anchor="middle" font-size="9" fill="#7b2d8b" opacity="0.7">D5 飞行1h10m</text>
+
+    <!-- Day 7: Hobart → Port Arthur (green road) -->
+    <path d="M 527,520 L 602,545"
+          stroke="#2d6a4f" stroke-width="3.5" fill="none"
+          marker-end="url(#arr-green)" stroke-linecap="round"/>
+    <!-- Day 7: Port Arthur return (dashed) -->
+    <path d="M 602,545 L 527,520"
+          stroke="#adb5bd" stroke-width="2" fill="none"
+          stroke-dasharray="7,5" opacity="0.6"/>
+
+    <!-- Day 8: Hobart → Freycinet -->
+    <path d="M 527,520 C 570,490 612,468 650,462"
+          stroke="#2d6a4f" stroke-width="3.5" fill="none"
+          marker-end="url(#arr-green)" stroke-linecap="round"/>
+
+    <!-- Day 9: Freycinet → Launceston -->
+    <path d="M 650,462 L 535,410"
+          stroke="#2d6a4f" stroke-width="3.5" fill="none"
+          marker-end="url(#arr-green)" stroke-linecap="round"/>
+
+    <!-- Day 9: Launceston → Cradle Mountain -->
+    <path d="M 535,410 L 425,435"
+          stroke="#2d6a4f" stroke-width="3.5" fill="none"
+          marker-end="url(#arr-green)" stroke-linecap="round"/>
+
+    <!-- Day 10: Cradle Mountain → Hobart (inland return, dashed) -->
+    <path d="M 425,435 C 462,472 500,500 527,520"
+          stroke="#adb5bd" stroke-width="2.5" fill="none"
+          stroke-dasharray="9,6" opacity="0.8"/>
+
+    <!-- Day 10: Hobart → Shenzhen RETURN FLIGHT -->
+    <path d="M 527,520 C 600,200 720,80 890,35"
+          stroke="#7b2d8b" stroke-width="2" fill="none"
+          stroke-dasharray="10,7" opacity="0.55"/>
+    <text x="720" y="285" text-anchor="middle" font-size="18" opacity="0.55">✈️</text>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- ── LOCATION MARKERS ── -->
+    <!-- ═══════════════════════════════════ -->
+
+    <!-- Helper macro (drawn inline) -->
+
+    <!-- D2: Melbourne -->
+    <circle cx="337" cy="99" r="16" fill="#0077b6" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="337" y="104" text-anchor="middle" font-size="12" fill="white" font-weight="bold">D2</text>
+    <rect x="290" y="70" width="94" height="22" rx="5" fill="white" opacity="0.88"/>
+    <text x="337" y="85" text-anchor="middle" font-size="11.5" fill="#0077b6" font-weight="bold">墨尔本</text>
+
+    <!-- Great Ocean Road label -->
+    <rect x="158" y="192" width="78" height="15" rx="7" fill="#0096c7" opacity="0.15"/>
+    <text x="197" y="203" text-anchor="middle" font-size="9.5" fill="#005f80" font-weight="bold">大洋路</text>
+
+    <!-- Koala spot (Kennett River) -->
+    <circle cx="225" cy="184" r="8" fill="#4caf50" stroke="white" stroke-width="2"/>
+    <text x="225" y="173" text-anchor="middle" font-size="10">🐨</text>
+    <text x="225" y="200" text-anchor="middle" font-size="8" fill="#2d6a4f">野生考拉</text>
+
+    <!-- D3: 12 Apostles / Campbell Port -->
+    <circle cx="148" cy="172" r="15" fill="#0096c7" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="148" y="177" text-anchor="middle" font-size="12" fill="white" font-weight="bold">D3</text>
+    <rect x="52" y="148" width="88" height="18" rx="5" fill="white" opacity="0.88"/>
+    <text x="96" y="161" text-anchor="middle" font-size="10" fill="#0096c7" font-weight="bold">十二门徒·坎贝尔港</text>
+
+    <!-- D4: Phillip Island -->
+    <circle cx="378" cy="172" r="15" fill="#f77f00" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="378" y="177" text-anchor="middle" font-size="12" fill="white" font-weight="bold">D4</text>
+    <rect x="384" y="162" width="62" height="18" rx="5" fill="white" opacity="0.88"/>
+    <text x="415" y="175" text-anchor="middle" font-size="10.5" fill="#f77f00" font-weight="bold">企鹅岛🐧</text>
+
+    <!-- D6/Hobart -->
+    <circle cx="527" cy="520" r="16" fill="#2d6a4f" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="527" y="525" text-anchor="middle" font-size="12" fill="white" font-weight="bold">D6</text>
+    <rect x="472" y="496" width="64" height="18" rx="5" fill="white" opacity="0.88"/>
+    <text x="504" y="509" text-anchor="middle" font-size="11" fill="#2d6a4f" font-weight="bold">霍巴特</text>
+
+    <!-- D7: Port Arthur -->
+    <circle cx="602" cy="545" r="14" fill="#1b4332" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="602" y="550" text-anchor="middle" font-size="11" fill="white" font-weight="bold">D7</text>
+    <rect x="611" y="534" width="68" height="18" rx="5" fill="white" opacity="0.88"/>
+    <text x="645" y="547" text-anchor="middle" font-size="10.5" fill="#1b4332" font-weight="bold">亚瑟港⛓️</text>
+
+    <!-- D8: Freycinet -->
+    <circle cx="650" cy="462" r="14" fill="#40916c" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="650" y="467" text-anchor="middle" font-size="11" fill="white" font-weight="bold">D8</text>
+    <rect x="658" y="451" width="72" height="18" rx="5" fill="white" opacity="0.88"/>
+    <text x="694" y="464" text-anchor="middle" font-size="10.5" fill="#40916c" font-weight="bold">弗雷西内🍷</text>
+
+    <!-- D9a: Launceston -->
+    <circle cx="535" cy="410" r="12" fill="#52b788" stroke="white" stroke-width="2" filter="url(#shadow)"/>
+    <text x="535" y="415" text-anchor="middle" font-size="10" fill="white" font-weight="bold">D9a</text>
+    <rect x="484" y="392" width="68" height="16" rx="4" fill="white" opacity="0.86"/>
+    <text x="518" y="404" text-anchor="middle" font-size="10" fill="#2d6a4f" font-weight="bold">朗塞斯顿🍺</text>
+
+    <!-- D9-10: Cradle Mountain -->
+    <circle cx="425" cy="435" r="16" fill="#1e6091" stroke="white" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="425" y="440" text-anchor="middle" font-size="10.5" fill="white" font-weight="bold">D9-10</text>
+    <rect x="358" y="412" width="62" height="18" rx="5" fill="white" opacity="0.88"/>
+    <text x="389" y="425" text-anchor="middle" font-size="10.5" fill="#1e6091" font-weight="bold">摇篮山🏔️</text>
+
+    <!-- ── Compass rose ── -->
+    <g transform="translate(855,75)">
+      <circle cx="0" cy="0" r="28" fill="white" opacity="0.82"/>
+      <polygon points="0,-18 -5,-6 5,-6" fill="#0077b6"/>
+      <polygon points="0,18 -5,6 5,6" fill="#ccc"/>
+      <polygon points="-18,0 -6,-5 -6,5" fill="#ccc"/>
+      <polygon points="18,0 6,-5 6,5" fill="#ccc"/>
+      <text x="0" y="-21" text-anchor="middle" font-size="10" fill="#0077b6" font-weight="bold">N</text>
+      <text x="0" y="31" text-anchor="middle" font-size="9" fill="#888">S</text>
+      <text x="-24" y="4" text-anchor="middle" font-size="9" fill="#888">W</text>
+      <text x="24" y="4" text-anchor="middle" font-size="9" fill="#888">E</text>
+    </g>
+
+    <!-- ── Map title box ── -->
+    <rect x="52" y="35" width="188" height="28" rx="7" fill="white" opacity="0.88"/>
+    <text x="146" y="54" text-anchor="middle" font-size="13" fill="#0077b6" font-weight="bold">澳大利亚东南部</text>
+
+    <!-- ── Scale bar (at bottom left) ── -->
+    <g transform="translate(52,635)">
+      <line x1="0" y1="0" x2="95" y2="0" stroke="#555" stroke-width="2"/>
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#555" stroke-width="2"/>
+      <line x1="95" y1="-5" x2="95" y2="5" stroke="#555" stroke-width="2"/>
+      <text x="47" y="-9" text-anchor="middle" font-size="9.5" fill="#555">≈ 100 km</text>
+    </g>
+
+    <!-- ── Legend box ── -->
+    <rect x="52" y="608" width="460" height="26" rx="6" fill="white" opacity="0.78"/>
+    <line x1="62" y1="621" x2="88" y2="621" stroke="#0096c7" stroke-width="3.5"/>
+    <text x="93" y="625" font-size="10" fill="#333">大洋路自驾</text>
+    <line x1="168" y1="621" x2="194" y2="621" stroke="#f77f00" stroke-width="3.5"/>
+    <text x="199" y="625" font-size="10" fill="#333">企鹅岛</text>
+    <line x1="248" y1="621" x2="274" y2="621" stroke="#2d6a4f" stroke-width="3.5"/>
+    <text x="279" y="625" font-size="10" fill="#333">塔斯马尼亚</text>
+    <line x1="348" y1="621" x2="366" y2="621" stroke="#7b2d8b" stroke-width="2.5" stroke-dasharray="7,4"/>
+    <text x="371" y="625" font-size="10" fill="#333">飞行</text>
+    <line x1="400" y1="621" x2="418" y2="621" stroke="#adb5bd" stroke-width="2.5" stroke-dasharray="7,4"/>
+    <text x="423" y="625" font-size="10" fill="#333">内陆返程</text>
+  </svg>
+
+  <!-- Legend below -->
+  <div class="warn-box" style="margin-top:14px;">
+    ⚠️ <strong>地图说明：</strong>坐标为近似值，仅用于路线示意。实际地理位置请以导航软件为准。
+    连接深圳与墨尔本、霍巴特的飞行路线为示意弧线，非真实航线走向。
+  </div>
+</section>
+
+<!-- ── DAY CARDS ── -->
+<section class="section-box">
+  <h2 class="section-title">📅 11天行程时间轴</h2>
+  <div class="timeline-grid">
+
+    <!-- Day 1 -->
+    <div class="day-card">
+      <div class="day-card-header h-transit">
+        <div class="day-num">1</div>
+        <div class="day-info">
+          <div class="day-date">4月25日（周六）</div>
+          <div class="day-location">✈️ 深圳/广州 → 墨尔本</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🛫</span><span>广州白云机场出发（南航推荐直飞）</span></div>
+        <div class="activity-item"><span class="activity-icon">⏱️</span><span>飞行约 10.5 小时，跨越时区</span></div>
+        <div class="activity-item"><span class="activity-icon">⚠️</span><span>ANZAC Day 澳洲全国公众假日</span></div>
+        <div class="drive-info">🌏 出发日 · 机票约 CNY 3,500～5,500/人</div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card">
+      <div class="day-card-header h-melb">
+        <div class="day-num">2</div>
+        <div class="day-info">
+          <div class="day-date">4月26日（周日）</div>
+          <div class="day-location">🏙️ 抵达墨尔本，调整时差</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🛬</span><span>抵达 MEL 机场，取车（Hertz/Avis）</span></div>
+        <div class="activity-item"><span class="activity-icon">☕</span><span>联邦广场 + 弗林德斯街站打卡</span></div>
+        <div class="activity-item"><span class="activity-icon">😴</span><span>早睡！明天 05:30 出发大洋路</span></div>
+        <div class="activity-item"><span class="activity-icon">🍺</span><span>Flat White — 墨尔本的骄傲</span></div>
+        <div class="drive-info">🏨 墨尔本市区 · Mantra on Russell 等</div>
+      </div>
+    </div>
+
+    <!-- Day 3 ⭐ -->
+    <div class="day-card">
+      <div class="day-card-header h-gor">
+        <div class="day-num">3</div>
+        <div class="day-info">
+          <div class="day-date">4月27日（周一）⭐ 重头戏</div>
+          <div class="day-location">🌊 大洋路精华 1 日游</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">⏰</span><span><strong>05:30 出发</strong>（必须！否则赶不上日落）</span></div>
+        <div class="activity-item"><span class="activity-icon">🏁</span><span>托尔博：大洋路起点地标拍照（15 min）</span></div>
+        <div class="activity-item"><span class="activity-icon">🐨</span><span>肯内特河：路边野生考拉★（免费，30 min）</span></div>
+        <div class="activity-item"><span class="activity-icon">🐟</span><span>阿波罗湾：渔民合作社午餐 + <strong>加满油</strong></span></div>
+        <div class="activity-item"><span class="activity-icon">🏖️</span><span>洛克阿德峡谷（岛拱门 + 喷水孔，1.5h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🪨</span><span>吉布森石阶 + Gog & Magog（20 min）</span></div>
+        <div class="activity-item"><span class="activity-icon">⭐</span><span><strong>十二门徒日落（16:30 抵达！）</strong></span></div>
+        <div class="drive-info">🚗 约 340 km / 6h 驾驶 · 🏨 坎贝尔港住宿</div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card">
+      <div class="day-card-header h-penguin">
+        <div class="day-num">4</div>
+        <div class="day-info">
+          <div class="day-date">4月28日（周二）</div>
+          <div class="day-location">🐧 菲利普岛（企鹅岛）</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🛣️</span><span>07:00 内陆 Princes Hwy 返墨尔本（3h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>墨尔本 → 菲利普岛（1.5h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🐨</span><span>考拉保育中心（树冠平视考拉，AUD 15）</span></div>
+        <div class="activity-item"><span class="activity-icon">🦭</span><span>诺比斯角：南半球最大毛海豹聚集地</span></div>
+        <div class="activity-item"><span class="activity-icon">⭐</span><span><strong>小蓝企鹅归巢仪式</strong>（约 21:00 结束）</span></div>
+        <div class="drive-info">🚗 约 4.5h 驾驶 · 🏨 菲利普岛住宿</div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day-card">
+      <div class="day-card-header h-transit">
+        <div class="day-num">5</div>
+        <div class="day-info">
+          <div class="day-date">4月29日（周三）</div>
+          <div class="day-location">✈️ 墨尔本 → 霍巴特 | 塔州开始！</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>菲利普岛 → 墨尔本（1.5h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🚙</span><span>MEL 还车（大洋路段）</span></div>
+        <div class="activity-item"><span class="activity-icon">✈️</span><span>Jetstar/Qantas 飞霍巴特（约 1h 10m）</span></div>
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>霍巴特机场重新取车（塔州段）</span></div>
+        <div class="activity-item"><span class="activity-icon">🦞</span><span>萨拉曼卡广场晚餐（Fish Frenzy）</span></div>
+        <div class="drive-info">✈️ 机票 AUD 50～150/人 · 🏨 霍巴特市区</div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day-card">
+      <div class="day-card-header h-hobart">
+        <div class="day-num">6</div>
+        <div class="day-info">
+          <div class="day-date">4月30日（周四）</div>
+          <div class="day-location">🏛️ 霍巴特城市深度游</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🏪</span><span>萨拉曼卡广场 + Battery Point 老街</span></div>
+        <div class="activity-item"><span class="activity-icon">⛰️</span><span>威灵顿山（海拔 1271m，俯瞰全城）</span></div>
+        <div class="activity-item"><span class="activity-icon">🎨</span><span>MONA 艺术博物馆（今日开放 ✅ 周四）</span></div>
+        <div class="activity-item"><span class="activity-icon">🥃</span><span>Lark Distillery 世界级威士忌品鉴</span></div>
+        <div class="drive-info">⚠️ MONA 周二闭馆，今日 OK · 🏨 霍巴特（连住）</div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day-card">
+      <div class="day-card-header h-arthur">
+        <div class="day-num">7</div>
+        <div class="day-info">
+          <div class="day-date">5月1日（周五）</div>
+          <div class="day-location">⛓️ 亚瑟港历史遗址</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">⛓️</span><span>亚瑟港世界遗产景区（4～5h，AUD 45）</span></div>
+        <div class="activity-item"><span class="activity-icon">⛵</span><span>港湾游船 + 死亡岛（含在门票内）</span></div>
+        <div class="activity-item"><span class="activity-icon">🌊</span><span>塔斯曼弓 & 魔鬼厨房 & 奇妙岩洞</span></div>
+        <div class="activity-item"><span class="activity-icon">👻</span><span><strong>幽灵之旅（夜）</strong>——情侣必选！AUD 30</span></div>
+        <div class="drive-info">🚗 往返约 200km / 3h · 🏨 霍巴特</div>
+      </div>
+    </div>
+
+    <!-- Day 8 -->
+    <div class="day-card">
+      <div class="day-card-header h-freycinet">
+        <div class="day-num">8</div>
+        <div class="day-info">
+          <div class="day-date">5月2日（周六）💡 萨拉曼卡市集日</div>
+          <div class="day-location">🍷 弗雷西内 · 酒杯湾</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🛒</span><span><strong>可 07:30 先逛萨拉曼卡周六市集再出发</strong></span></div>
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>驾车前往弗雷西内（约 2.5h）</span></div>
+        <div class="activity-item"><span class="activity-icon">⭐</span><span>酒杯湾观景台步道（往返 2.5km，300m↑）</span></div>
+        <div class="activity-item"><span class="activity-icon">🏖️</span><span>可选：下行至沙滩（全程约 3h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🛶</span><span>可选：皮划艇租用，仰视粉红花岗岩</span></div>
+        <div class="drive-info">🚗 约 206km / 2.5h · 🏨 Freycinet Lodge 木屋</div>
+      </div>
+    </div>
+
+    <!-- Day 9 -->
+    <div class="day-card">
+      <div class="day-card-header h-cradle">
+        <div class="day-num">9</div>
+        <div class="day-info">
+          <div class="day-date">5月3日（周日）⚠️ 行程偏长</div>
+          <div class="day-location">🏔️ 摇篮山（经朗塞斯顿）</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>Coles Bay → 朗塞斯顿（约 2.5h）——建议早出发</span></div>
+        <div class="activity-item"><span class="activity-icon">🍺</span><span>朗塞斯顿：Boag's 啤酒厂 + 卡塔拉克特峡谷</span></div>
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>朗塞斯顿 → 摇篮山（约 1.5h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🦔</span><span>Wombat Pool 步道寻袋熊（傍晚）</span></div>
+        <div class="activity-item"><span class="activity-icon">💧</span><span>鸽子湖倒影 + 星空</span></div>
+        <div class="drive-info">⚠️ 总驾驶约 5h，请早出发！· 🏨 Peppers Lodge ⭐</div>
+      </div>
+    </div>
+
+    <!-- Day 10 -->
+    <div class="day-card">
+      <div class="day-card-header h-cradle">
+        <div class="day-num">10</div>
+        <div class="day-info">
+          <div class="day-date">5月4日（周一）⚠️ 注意时间</div>
+          <div class="day-location">🏔️ 鸽子湖环线 → 夜班机</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">⭐</span><span><strong>08:30</strong> 出发鸽子湖环形步道（6km，约 2.5h）</span></div>
+        <div class="activity-item"><span class="activity-icon">🌲</span><span>舞厅森林（白桉树阳光穿透，步道秘境）</span></div>
+        <div class="activity-item"><span class="activity-icon">🚗</span><span>午后返回霍巴特（约 2.5h）+ 还车</span></div>
+        <div class="activity-item"><span class="activity-icon">🦞</span><span>码头最后一顿海鲜 + Sullivan's Cove 伴手礼</span></div>
+        <div class="activity-item"><span class="activity-icon">✈️</span><span>深夜航班飞深圳（经墨尔本/悉尼中转）</span></div>
+        <div class="drive-info">⚠️ 时间紧凑，末班摇篮山巴士约 17:00</div>
+      </div>
+    </div>
+
+    <!-- Day 11 -->
+    <div class="day-card">
+      <div class="day-card-header h-transit">
+        <div class="day-num">11</div>
+        <div class="day-info">
+          <div class="day-date">5月5日（周二）</div>
+          <div class="day-location">🏠 抵达深圳，圆满收官</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="activity-item"><span class="activity-icon">🛬</span><span>抵达深圳宝安国际机场</span></div>
+        <div class="activity-item"><span class="activity-icon">🦘</span><span>满载大洋路壮阔与塔州净土记忆</span></div>
+        <div class="activity-item"><span class="activity-icon">🍷</span><span>行李里的 Sullivan's Cove 威士忌</span></div>
+        <div class="drive-info">🏠 回家！五一假期圆满结束</div>
+      </div>
+    </div>
+
+  </div><!-- /timeline-grid -->
+</section>
+
+<!-- ── DISTANCE TABLE ── -->
+<section class="section-box">
+  <h2 class="section-title">🚗 驾车里程汇总</h2>
+  <table class="dist-table">
+    <thead>
+      <tr>
+        <th>天次</th>
+        <th>路段</th>
+        <th style="text-align:center">距离</th>
+        <th style="text-align:center">驾车时长</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day-label d-gor">Day 3</td>
+        <td>墨尔本 → 大洋路沿线 → 十二门徒 → 坎贝尔港</td>
+        <td style="text-align:center">约 340 km</td>
+        <td style="text-align:center">~6h（不含停留）</td>
+      </tr>
+      <tr>
+        <td class="day-label d-penguin">Day 4</td>
+        <td>坎贝尔港 → 内陆 → 墨尔本 → 菲利普岛</td>
+        <td style="text-align:center">约 300 km</td>
+        <td style="text-align:center">~4.5h</td>
+      </tr>
+      <tr>
+        <td class="day-label" style="color:#6c757d">Day 5</td>
+        <td>菲利普岛 → 墨尔本 + ✈️ 飞霍巴特</td>
+        <td style="text-align:center">140 km + 飞行</td>
+        <td style="text-align:center">1.5h + 1h10m</td>
+      </tr>
+      <tr>
+        <td class="day-label d-tas">Day 7</td>
+        <td>霍巴特 → 亚瑟港 → 霍巴特（往返）</td>
+        <td style="text-align:center">约 200 km</td>
+        <td style="text-align:center">~3h</td>
+      </tr>
+      <tr>
+        <td class="day-label d-tas">Day 8</td>
+        <td>霍巴特 → 弗雷西内 Coles Bay</td>
+        <td style="text-align:center">约 206 km</td>
+        <td style="text-align:center">~2.5h</td>
+      </tr>
+      <tr>
+        <td class="day-label d-tas" style="color:#c45c00">Day 9 ⚠️</td>
+        <td>Coles Bay → 朗塞斯顿 → 摇篮山</td>
+        <td style="text-align:center">约 290 km</td>
+        <td style="text-align:center">~4～5h（注意！）</td>
+      </tr>
+      <tr>
+        <td class="day-label d-tas">Day 10</td>
+        <td>摇篮山 → 霍巴特（还车）</td>
+        <td style="text-align:center">约 180 km</td>
+        <td style="text-align:center">~2.5h</td>
+      </tr>
+      <tr class="total">
+        <td colspan="2">🚗 自驾总里程（不含飞行）</td>
+        <td style="text-align:center">约 1,656 km</td>
+        <td style="text-align:center">约 24h</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box" style="margin-top:16px;">
+    ⚠️ <strong>重点提醒：</strong>
+    Day 9（Coles Bay→朗塞斯顿→摇篮山）总驾驶约 5h，建议 08:00 出发，否则抵达摇篮山时已过接驳巴士末班（17:00）。
+    &nbsp;|&nbsp; Day 10 时间紧凑，建议 08:30 开始鸽子湖步道，13:00 前出发返回霍巴特。
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>🌊 大洋路 × 塔斯马尼亚自驾攻略 &nbsp;|&nbsp; 2026五一情侣版 &nbsp;|&nbsp; 深圳出发</p>
+  <p style="margin-top:4px">两人总预算约 CNY 45,000～55,000 &nbsp;|&nbsp; AUD 1 ≈ CNY 4.6（参考汇率）</p>
+  <p style="margin-top:4px; font-size:0.78em;">行程数据来源：《澳大利亚大洋路+塔斯马尼亚自驾攻略2026五一》</p>
+</footer>
+
+</div><!-- /container -->
+</body>
+</html>
