@@ -342,7 +342,20 @@ class FeishuClient:
             if btype in LEAF_BLOCK_TYPES:
                 if btype == 3:  # H1（# 标题）→ 用作文档标题，正文中跳过
                     continue
-                pending_leaves.append(_shift_heading(_clean_block(src_block)))
+                if src_block.get("children"):
+                    # 嵌套列表（bullet/ordered 有子块）：不可批量，单独创建后递归子块
+                    flush_leaves()
+                    clean = _shift_heading(_clean_block(src_block))
+                    try:
+                        created = self.create_blocks(tgt_doc, tgt_parent_id, [clean], index + committed)
+                        committed += 1
+                        if created:
+                            self.copy_blocks(src_doc, src_block["children"],
+                                             tgt_doc, created[0]["block_id"], src_map, 0)
+                    except Exception as e:
+                        print(f"  警告：跳过嵌套列表 type={btype}: {str(e)[:80]}")
+                else:
+                    pending_leaves.append(_shift_heading(_clean_block(src_block)))
             else:
                 # 容器块：先 flush 已积累的叶子，再创建容器
                 flush_leaves()
@@ -367,66 +380,66 @@ class FeishuClient:
 
             src_cell_ids = src_block.get("table", {}).get("cells", [])
 
-            # Feishu API 限制：单次最多创建 9 行的表格
-            # 超过 9 行时，拆成多个子表（每个都带表头行）
-            MAX_ROWS = 9
-            if n_rows <= MAX_ROWS:
-                row_groups = [list(range(n_rows))]
-            else:
-                # 第 0 行是表头；数据行每批最多 MAX_ROWS-1 行
-                data_rows = list(range(1, n_rows))
-                chunk = MAX_ROWS - 1
-                row_groups = [[0] + data_rows[i:i + chunk]
-                              for i in range(0, len(data_rows), chunk)]
+            # 创建时最多 9 行（API 限制），超出部分用 insert_table_row 逐行追加
+            init_rows = min(n_rows, 9)
+            table_prop = {
+                "row_size": init_rows,
+                "column_size": n_cols,
+                "header_row": has_header,
+                "header_column": bool(prop.get("header_column", False)),
+            }
+            if "column_width" in prop:
+                table_prop["column_width"] = prop["column_width"]
+            try:
+                created = self.create_blocks(tgt_doc, tgt_parent_id, [{
+                    "block_type": 31,
+                    "table": {"cells": [], "property": table_prop},
+                }], tgt_index)
+            except Exception as e:
+                print(f"  警告：表格创建失败（跳过）: {e}")
+                return 0
+            if not created:
+                return 0
 
-            tables_created = 0
-            for g_idx, row_indices in enumerate(row_groups):
-                chunk_rows = len(row_indices)
-                table_prop = {
-                    "row_size": chunk_rows,
-                    "column_size": n_cols,
-                    "header_row": has_header,
-                    "header_column": bool(prop.get("header_column", False)),
-                }
-                if "column_width" in prop:
-                    table_prop["column_width"] = prop["column_width"]
+            tbl_id = created[0]["block_id"]
+
+            # 追加剩余行
+            for row_idx in range(init_rows, n_rows):
                 try:
-                    created = self.create_blocks(tgt_doc, tgt_parent_id, [{
-                        "block_type": 31,
-                        "table": {"cells": [], "property": table_prop},
-                    }], tgt_index + tables_created)
+                    self._patch(f"/docx/v1/documents/{tgt_doc}/blocks/{tbl_id}",
+                                {"insert_table_row": {"row_index": row_idx}})
                 except Exception as e:
-                    print(f"  警告：表格第{g_idx+1}段创建失败（跳过）: {e}")
-                    continue
-                if not created:
-                    continue
-                tables_created += 1
+                    print(f"  警告：第 {row_idx+1} 行追加失败: {e}")
+                    break
 
-                tgt_cell_ids = created[0].get("table", {}).get("cells", [])
-                for new_r, orig_r in enumerate(row_indices):
-                    for c in range(n_cols):
-                        src_flat = orig_r * n_cols + c
-                        tgt_flat = new_r * n_cols + c
-                        if src_flat >= len(src_cell_ids) or tgt_flat >= len(tgt_cell_ids):
-                            continue
-                        src_cell = src_map.get(src_cell_ids[src_flat])
-                        tgt_cell_id = tgt_cell_ids[tgt_flat]
-                        if not src_cell:
-                            continue
-                        cell_children = src_cell.get("children", [])
-                        if not cell_children:
-                            continue
-                        # 在 index=0 插入内容（默认空段落被挤到末尾），然后立即删除末尾空段落
-                        n_inserted = self.copy_blocks(src_doc, cell_children, tgt_doc, tgt_cell_id, src_map, 0)
-                        if n_inserted > 0:
-                            try:
-                                self._delete(
-                                    f"/docx/v1/documents/{tgt_doc}/blocks/{tgt_cell_id}/children/batch_delete",
-                                    {"start_index": n_inserted, "end_index": n_inserted + 1},
-                                )
-                            except Exception:
-                                pass
-            return tables_created
+            # 重新获取完整 cell 列表（追加行后 cell 已更新）
+            tbl_data = self._get(f"/docx/v1/documents/{tgt_doc}/blocks/{tbl_id}")
+            tgt_cell_ids = tbl_data.get("block", tbl_data).get("table", {}).get("cells", [])
+
+            for row in range(n_rows):
+                for c in range(n_cols):
+                    src_flat = row * n_cols + c
+                    tgt_flat = row * n_cols + c
+                    if src_flat >= len(src_cell_ids) or tgt_flat >= len(tgt_cell_ids):
+                        continue
+                    src_cell = src_map.get(src_cell_ids[src_flat])
+                    tgt_cell_id = tgt_cell_ids[tgt_flat]
+                    if not src_cell:
+                        continue
+                    cell_children = src_cell.get("children", [])
+                    if not cell_children:
+                        continue
+                    # 在 index=0 插入内容（默认空段落被挤到末尾），然后立即删除末尾空段落
+                    n_inserted = self.copy_blocks(src_doc, cell_children, tgt_doc, tgt_cell_id, src_map, 0)
+                    if n_inserted > 0:
+                        try:
+                            self._delete(
+                                f"/docx/v1/documents/{tgt_doc}/blocks/{tgt_cell_id}/children/batch_delete",
+                                {"start_index": n_inserted, "end_index": n_inserted + 1},
+                            )
+                        except Exception:
+                            pass
+            return 1
 
         else:
             # 其他容器：先创建父 block，再递归子节点
@@ -520,12 +533,21 @@ def main():
 
     client = FeishuClient(app_id=args.app_id, app_secret=args.app_secret)
 
-    # ── 1. 获取目标文档 ID ──
+    # ── 1. 获取目标文档 ID 并更新标题 ──
     print("正在获取目标文档信息...")
     node = client.get_wiki_node(node_token)
     tgt_doc_id = node["obj_token"]
     space_id = node["space_id"]
     print(f"目标文档 ID: {tgt_doc_id}")
+
+    h1_match = re.search(r'^#\s+(.+)$', md_bytes.decode('utf-8', errors='replace'), re.MULTILINE)
+    if h1_match:
+        title = h1_match.group(1).strip()
+        try:
+            client.update_wiki_title(space_id, node_token, title)
+            print(f"已更新文档标题: {title}")
+        except Exception as e:
+            print(f"  警告：标题更新失败（{e}），请手动将页面重命名为「{title}」")
 
     # ── 2. 上传 MD 文件到 Drive ──
     print("正在获取 Drive 根目录...")
@@ -585,18 +607,7 @@ def main():
         index=insert_index,
     )
 
-    # ── 7. 提示手动设置文档标题 ──
-    # ── 7. 更新 wiki 页面标题（取 MD 第一个 # 标题）──
-    h1_match = re.search(r'^#\s+(.+)$', md_bytes.decode('utf-8', errors='replace'), re.MULTILINE)
-    if h1_match:
-        title = h1_match.group(1).strip()
-        try:
-            client.update_wiki_title(space_id, node_token, title)
-            print(f"已更新文档标题: {title}")
-        except Exception as e:
-            print(f"  警告：标题更新失败（{e}），请手动将页面重命名为「{title}」")
-
-    # ── 8. 删除临时文档 ──
+    # ── 7. 删除临时文档 ──
     print(f"正在删除临时文档（token={tmp_doc_token}）...")
     client.delete_drive_file(tmp_doc_token, "docx")
 
