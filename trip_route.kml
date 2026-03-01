@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>澳大利亚自驾路线 2026五一</name>
+  <description>大洋路 × 菲利普岛 × 塔斯马尼亚 | 2026年4月25日–5月5日 | 两人情侣</description>
+
+  <!-- ══════════════════════════════════════════
+       颜色样式定义
+  ══════════════════════════════════════════ -->
+
+  <!-- 大洋路：橙色 -->
+  <Style id="s-gor-line">
+    <LineStyle><color>ff0098ff</color><width>5</width></LineStyle>
+  </Style>
+  <!-- 内陆返程：橙色半透明 -->
+  <Style id="s-inland-line">
+    <LineStyle><color>660098ff</color><width>3</width></LineStyle>
+  </Style>
+  <!-- 菲利普岛：紫色 -->
+  <Style id="s-phi-line">
+    <LineStyle><color>ffb0279c</color><width>5</width></LineStyle>
+  </Style>
+  <!-- 飞行段：红色 -->
+  <Style id="s-flight-line">
+    <LineStyle><color>ff2828c6</color><width>3</width></LineStyle>
+  </Style>
+  <!-- 塔斯马尼亚主路：绿色 -->
+  <Style id="s-tas-line">
+    <LineStyle><color>ff006900</color><width>5</width></LineStyle>
+  </Style>
+  <!-- 塔斯马尼亚返程：绿色半透明 -->
+  <Style id="s-tas-return-line">
+    <LineStyle><color>66006900</color><width>3</width></LineStyle>
+  </Style>
+
+  <!-- 标注点样式 -->
+  <Style id="s-airport">
+    <IconStyle>
+      <scale>1.3</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="s-star">
+    <IconStyle>
+      <scale>1.4</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/red-dot.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="s-orange">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="s-purple">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/purple-dot.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="s-green">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="s-yellow">
+    <IconStyle>
+      <scale>1.0</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon>
+    </IconStyle>
+  </Style>
+
+  <!-- ══════════════════════════════════════════
+       第一章：维多利亚州（大洋路 + 菲利普岛）
+  ══════════════════════════════════════════ -->
+  <Folder>
+    <name>第一章：维多利亚州 Day2–5</name>
+    <description>大洋路 + 菲利普岛。Day2取车，Day3大洋路全天，Day4企鹅岛，Day5还车飞塔斯马尼亚。</description>
+
+    <!-- 停留点 -->
+    <Placemark>
+      <name>✈ 墨尔本（Day2 取车·住）</name>
+      <description><![CDATA[<b>抵达+休整日</b><br>
+取租车（Hertz/Avis，MEL国际航站楼）<br>
+下午：联邦广场·弗林德斯街站·Flat White咖啡<br>
+⚠️ <b>明天05:30出发，务必早睡！</b><br><br>
+住宿：Mantra on Russell / Holiday Inn Central<br>
+AUD 150–250/晚]]></description>
+      <styleUrl>#s-airport</styleUrl>
+      <Point><coordinates>144.9631,-37.8136,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>托尔博 大洋路起点（Day3）</name>
+      <description><![CDATA[大洋路正式起点，标志性纪念拱门。<br>
+冲浪圣地，Rip Curl与Quicksilver发源地。<br>
+停留约15分钟，拍完出发。]]></description>
+      <styleUrl>#s-orange</styleUrl>
+      <Point><coordinates>144.3244,-38.3313,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>安格尔西 野生袋鼠高尔夫球场（Day3 可选）</name>
+      <description><![CDATA[Anglesea Golf Club草坪上常年有约300只野生袋鼠！<br>
+购票进场约AUD12.5/人，停留30分钟。<br>
+<i>时间紧可跳过，肯内特河考拉更值得</i>]]></description>
+      <styleUrl>#s-yellow</styleUrl>
+      <Point><coordinates>144.1874,-38.4059,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐ 肯内特河 路边野生考拉（Day3）</name>
+      <description><![CDATA[<b>全程最值得停的考拉点！</b><br>
+沿Grey River Road路边桉树上免费看野生考拉。<br>
+完全免费·距离极近·无需门票·胜过任何动物园<br>
+建议停留30分钟仔细寻找（看树叉处）。]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>143.8414,-38.6591,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>阿波罗湾 午餐+⛽加满油（Day3）</name>
+      <description><![CDATA[<b>⚠️ 必须在此加满油！这是最后可靠的加油站。</b><br>
+Apollo Bay Fishermen's Co-op：码头直销龙虾·鲍鱼·鱼排<br>
+AUD 30–60/份，停留约1小时。<br>
+FoodWorks/IGA超市买好食物和水（往后无大型超市）]]></description>
+      <styleUrl>#s-orange</styleUrl>
+      <Point><coordinates>143.6726,-38.7605,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>洛克阿德峡谷（Day3）</name>
+      <description><![CDATA[1878年沉船命名。深红悬崖+碧绿海水+白沙滩。<br>
+推荐：Island Archway + Blowhole两条短线<br>
+免费，停留1–1.5小时。]]></description>
+      <styleUrl>#s-orange</styleUrl>
+      <Point><coordinates>143.0218,-38.6870,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>吉布森石阶（Day3）</name>
+      <description><![CDATA[走下石阶到海滩，仰视独立石柱Gog和Magog。<br>
+免费，约20分钟。涨潮时可能关闭。<br>
+紧邻十二门徒停车场，不要错过！]]></description>
+      <styleUrl>#s-orange</styleUrl>
+      <Point><coordinates>142.9876,-38.6649,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐⭐⭐ 十二门徒 日落（Day3 16:30前到）</name>
+      <description><![CDATA[<b>大洋路压轴之作！</b><br>
+5月日落约17:15，建议16:30前抵达占好观景台位置。<br>
+免费入场，有地下通道连接两处主观景台。<br><br>
+<b>✈ 直升机升级</b>（强烈推荐！）：<br>
+16分钟 AUD 195/人（两人合计AUD 390）<br>
+预约：12apostleshelicopters.com.au<br>
+⚠️ 大风天气可能取消，需确认天气]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>142.9958,-38.6596,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>群岛湾 Bay of Islands（Day3 延伸）</name>
+      <description><![CDATA[距十二门徒约10km西行，灰白石灰岩柱群错落大海。<br>
+视野比十二门徒更开阔，<b>几乎没有中国游客</b>。<br>
+免费，时间允许强烈建议顺路看。]]></description>
+      <styleUrl>#s-yellow</styleUrl>
+      <Point><coordinates>142.8744,-38.5803,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🏨 坎贝尔港住宿（Day3晚）</name>
+      <description><![CDATA[<b>住宿：Southern Ocean Motor Inn</b><br>
+或 Daysy Hill Country Cottages（网红田园小屋）<br>
+紧邻十二门徒，可听浪声入眠。<br>
+AUD 130–220/晚]]></description>
+      <styleUrl>#s-green</styleUrl>
+      <Point><coordinates>142.9957,-38.6127,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🐋 沃南布尔 5月观鲸台（可选延伸）</name>
+      <description><![CDATA[<b>5月专属体验！夏季旺季完全没有此机会。</b><br>
+Logan's Beach专设观鲸台，免费看南露脊鲸育幼·喷水。<br>
+距坎贝尔港约62km，可在此住一晚再走内陆路返程。]]></description>
+      <styleUrl>#s-yellow</styleUrl>
+      <Point><coordinates>142.4851,-38.3837,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🐨 菲利普岛考拉保育中心（Day4）</name>
+      <description><![CDATA[木栈道与树冠等高，近距离平视野生考拉。<br>
+AUD 15/人，停留约45分钟。]]></description>
+      <styleUrl>#s-purple</styleUrl>
+      <Point><coordinates>145.1583,-38.4833,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🦭 诺比斯角 海豹礁（Day4）</name>
+      <description><![CDATA[Seal Rocks数千只毛海豹栖息礁石，南半球最大聚集地之一。<br>
+免费，建议带望远镜。旁边南极体验馆AUD 15/人。]]></description>
+      <styleUrl>#s-purple</styleUrl>
+      <Point><coordinates>144.8667,-38.5167,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐⭐⭐ 小蓝企鹅归巢 Penguin Parade（Day4 ~19:30）</name>
+      <description><![CDATA[<b>全程最治愈的记忆！</b><br>
+体长仅33cm的小蓝企鹅每晚从大海归来，摇摇摆摆爬上岸。<br>
+约19:30开始（日落后），持续约1小时。<br><br>
+票价：AUD 30–35/人（标准票）<br>
+升级：地下视角台 AUD 40–60/人<br>
+预约：<b>penguins.org.au</b><br>
+⚠️ <b>绝对禁止使用任何闪光灯！</b>]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>144.9069,-38.5182,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>🏨 菲利普岛住宿（Day4晚）</name>
+      <description><![CDATA[住宿：Ramada Phillip Island Nature Resort<br>
+或 The Island Accommodation<br>
+企鹅归巢区步行可达。AUD 150–280/晚<br>
+次日早上轻松返回墨尔本，避免深夜疲劳驾驶。]]></description>
+      <styleUrl>#s-purple</styleUrl>
+      <Point><coordinates>145.2335,-38.4522,0</coordinates></Point>
+    </Placemark>
+
+    <!-- 路线 -->
+    <Placemark>
+      <name>🟠 大洋路驾车路线（Day3）</name>
+      <description>墨尔本→托尔博→安格尔西→肯内特河→阿波罗湾→洛克阿德峡谷→十二门徒→坎贝尔港 | 约340km，05:30出发</description>
+      <styleUrl>#s-gor-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          144.9631,-37.8136,0
+          144.7000,-37.9200,0
+          144.5000,-38.0500,0
+          144.3500,-38.1500,0
+          144.3244,-38.3313,0
+          144.1874,-38.4059,0
+          144.0500,-38.4800,0
+          143.9839,-38.5442,0
+          143.8800,-38.6100,0
+          143.8414,-38.6591,0
+          143.7500,-38.7100,0
+          143.6726,-38.7605,0
+          143.5127,-38.8591,0
+          143.4500,-38.8400,0
+          143.3969,-38.7891,0
+          143.2500,-38.7200,0
+          143.1000,-38.6800,0
+          143.0218,-38.6870,0
+          142.9876,-38.6649,0
+          142.9958,-38.6596,0
+          142.9957,-38.6127,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟠 内陆返程（Day4，Princes Hwy）</name>
+      <description>坎贝尔港→内陆路→墨尔本，约3小时，沿途在小镇喝咖啡</description>
+      <styleUrl>#s-inland-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          142.9957,-38.6127,0
+          143.2000,-38.4000,0
+          143.5884,-38.3384,0
+          143.9000,-38.2000,0
+          144.2000,-38.1000,0
+          144.3500,-38.1500,0
+          144.6000,-37.9500,0
+          144.9631,-37.8136,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟣 菲利普岛路线（Day4）</name>
+      <description>墨尔本→菲利普岛，约140km，1.5小时</description>
+      <styleUrl>#s-phi-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          144.9631,-37.8136,0
+          145.1500,-38.0000,0
+          145.3000,-38.2000,0
+          145.3672,-38.5306,0
+          145.2335,-38.4522,0
+          145.1583,-38.4833,0
+          145.0000,-38.5000,0
+          144.9069,-38.5182,0
+          144.8667,-38.5167,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟣 菲利普岛返墨尔本（Day5）</name>
+      <description>返程，约140km，1.5小时，还车后飞霍巴特</description>
+      <styleUrl>#s-inland-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          145.2335,-38.4522,0
+          145.3672,-38.5306,0
+          145.3000,-38.2000,0
+          145.1500,-38.0000,0
+          144.9631,-37.8136,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Folder>
+
+  <!-- ══════════════════════════════════════════
+       飞行段
+  ══════════════════════════════════════════ -->
+  <Folder>
+    <name>✈ 飞行段</name>
+
+    <Placemark>
+      <name>✈ 深圳→墨尔本（Day1，约10.5小时）</name>
+      <description><![CDATA[推荐：南方航空（CZ）广州白云直飞，约10.5小时。<br>
+参考票价：¥3,500–5,500/人（往返）<br>
+⚠️ 4月25日出发日恰逢ANZAC Day法定假日]]></description>
+      <styleUrl>#s-flight-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          114.0290,22.6490,0
+          118.0000,18.0000,0
+          125.0000,10.0000,0
+          132.0000,5.0000,0
+          138.0000,-20.0000,0
+          142.0000,-30.0000,0
+          144.9631,-37.8136,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>✈ 墨尔本→霍巴特（Day5，约70分钟）</name>
+      <description><![CDATA[Jetstar / Qantas，约1小时10分。<br>
+参考票价：AUD 50–150/人（提前购）<br>
+⚠️ <b>Jetstar部分班次从Avalon机场出发，购票务必确认从MEL出发！</b>]]></description>
+      <styleUrl>#s-flight-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          144.9631,-37.8136,0
+          145.5000,-39.0000,0
+          146.2000,-40.8000,0
+          147.3272,-42.8819,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>✈ 霍巴特→深圳（Day10深夜，约12–16小时）</name>
+      <description>经墨尔本或悉尼中转，深夜出发，Day11抵达深圳</description>
+      <styleUrl>#s-flight-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          147.3272,-42.8819,0
+          146.2000,-40.8000,0
+          145.5000,-39.0000,0
+          144.9631,-37.8136,0
+          138.0000,-22.0000,0
+          130.0000,-15.0000,0
+          120.0000,-5.0000,0
+          114.0290,22.6490,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Folder>
+
+  <!-- ══════════════════════════════════════════
+       第二章：塔斯马尼亚
+  ══════════════════════════════════════════ -->
+  <Folder>
+    <name>第二章：塔斯马尼亚 Day5–10</name>
+    <description>霍巴特为基地·Day6霍巴特城市·Day7亚瑟港·Day8酒杯湾·Day9-10摇篮山</description>
+
+    <!-- 停留点 -->
+    <Placemark>
+      <name>✈ 霍巴特（Day5–7 基地）</name>
+      <description><![CDATA[塔斯马尼亚首府，在此重新取租车。<br>
+住宿：Henry Jones Art Hotel（由果酱厂改建，艺术精品）<br>
+AUD 200–350/晚（连住3晚）<br>
+周边：萨拉曼卡广场·码头区海鲜]]></description>
+      <styleUrl>#s-airport</styleUrl>
+      <Point><coordinates>147.3272,-42.8819,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>萨拉曼卡广场（Day6）</name>
+      <description><![CDATA[19世纪金色沙岩仓库改建的文艺街区。<br>
+<b>周六有市集</b>（8–15点，300+摊位）。<br>
+Battery Point老居住区步行可达，最适合情侣慢逛。]]></description>
+      <styleUrl>#s-green</styleUrl>
+      <Point><coordinates>147.3338,-42.8878,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>威灵顿山顶（Day6）</name>
+      <description><![CDATA[海拔1,271m，自驾30分钟直达山顶。<br>
+俯瞰霍巴特、达尔文港全景。<br>
+⚠️ 5月山顶接近0°C，可能有积雪，带冲锋衣+手套！<br>
+免费。]]></description>
+      <styleUrl>#s-green</styleUrl>
+      <Point><coordinates>147.2333,-42.8953,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐ MONA 古老与新艺术博物馆（Day6）⚠️周二关</name>
+      <description><![CDATA[<b>⚠️ 每周二闭馆！Day6是4月30日（周四）OK。</b><br>
+建于地下砂岩洞穴，澳洲最具争议的私人博物馆。<br>
+乘渡轮前往（Brooke Street Pier出发，约20分钟）。<br>
+AUD 35/人，建议下午游览3–4小时。<br>
+内设The Source餐厅（岩洞就餐，全塔州食材）。]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>147.2503,-42.8212,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Lark Distillery 🥃威士忌（Day6）</name>
+      <description><![CDATA[塔州威士忌复兴奠基者，多次获世界大奖。<br>
+品鉴套餐AUD 20–40，含威士忌巧克力。<br>
+<b>伴手礼必买：Sullivan's Cove French Oak威士忌</b>]]></description>
+      <styleUrl>#s-green</styleUrl>
+      <Point><coordinates>147.3270,-42.8829,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐ 亚瑟港历史遗址（Day7）</name>
+      <description><![CDATA[<b>世界遗产。</b>19世纪英国流放罪犯监狱殖民地。<br>
+哥特式教堂残骸·砖砌监狱·死亡岛游船。<br>
+AUD 45/人（含港湾游船+死亡岛）<br>
+建议停留4–5小时，租用语音导览。<br><br>
+<b>👻 夜间幽灵之旅（强烈推荐情侣！）</b><br>
+AUD 30/人，需提前预约：portarthur.org.au]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>147.8499,-43.1355,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>塔斯曼弓 + 魔鬼厨房（Day7 顺路）</name>
+      <description><![CDATA[三处紧挨着，45分钟全部游览，免费（含在公园通票内）：<br>
+• Tasman Arch：天然石拱横跨百米深渊<br>
+• Devil's Kitchen：狭长竖缝，海浪轰鸣<br>
+• Remarkable Cave：弓形洞口框住远处大洋]]></description>
+      <styleUrl>#s-green</styleUrl>
+      <Point><coordinates>147.9167,-43.1000,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Ross小镇 网红香草蛋糕（Day8 路过）</name>
+      <description><![CDATA[Ross Village Bakery，网红Vanilla Slice香草蛋糕。<br>
+从霍巴特去酒杯湾的Midland Highway上必经，顺路停。]]></description>
+      <styleUrl>#s-yellow</styleUrl>
+      <Point><coordinates>147.4882,-41.9961,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐⭐⭐ 酒杯湾 Wineglass Bay（Day8）</name>
+      <description><![CDATA[<b>塔州东海岸最精华地段！</b><br>
+粉红花岗岩山脉（Hazards）环抱完美弯月形白沙滩。<br>
+观景台步道：2.5km往返，爬升300m，约1.5小时。<br>
+5月游客极少，几乎可以包场！<br><br>
+公园通票（Parks Pass）：AUD 50/辆，8周有效。<br>
+摇篮山、亚瑟港等全部适用，强烈建议在入口购买。<br><br>
+住宿：Freycinet Lodge（国家公园内木屋，带木质浴缸）<br>
+AUD 250–400/晚（提前2月预订）]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>148.2857,-42.1189,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>朗塞斯顿（Day9 午餐停）</name>
+      <description><![CDATA[塔州第二大城市，从Coles Bay去摇篮山途经。<br>
+<b>Boag's Brewery</b>：45分钟导览含4杯品鉴，AUD 25/人。<br>
+<b>Cataract Gorge</b>：市中心步行可达，免费，秋色绝美，悬椅缆车AUD16/人。<br>
+建议停留1.5小时。]]></description>
+      <styleUrl>#s-green</styleUrl>
+      <Point><coordinates>147.1269,-41.4332,0</coordinates></Point>
+    </Placemark>
+
+    <Placemark>
+      <name>⭐⭐⭐ 摇篮山 鸽子湖（Day9–10）</name>
+      <description><![CDATA[<b>锯齿状摇篮山倒映鸽子湖，5月秋色金黄。</b><br><br>
+🔥 <b>鸽子湖环形步道</b>：6km，全程平坦，约2.5小时<br>
+⚠️ <b>末班接驳巴士17:00，绝对不能错过！</b><br>
+5月山顶气温5–10°C，白天也可能起大风。<br><br>
+🦫 Ronny Creek草地：高概率遇到野生袋熊觅食<br>
+🌌 湖边看南极光（5月进入极光季，装Aurora Service Australia App）<br><br>
+住宿：<b>Peppers Cradle Mountain Lodge</b>（强烈推荐！）<br>
+壁炉木屋 + 露天热水浴缸，情侣旅行浪漫度天花板。<br>
+AUD 300–500/晚（含早餐），提前2–3月预订！]]></description>
+      <styleUrl>#s-star</styleUrl>
+      <Point><coordinates>145.9497,-41.6453,0</coordinates></Point>
+    </Placemark>
+
+    <!-- 塔州路线 -->
+    <Placemark>
+      <name>🟢 霍巴特→亚瑟港（Day7）</name>
+      <description>约100km，1.5小时。顺路看塔斯曼弓·魔鬼厨房。</description>
+      <styleUrl>#s-tas-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          147.3272,-42.8819,0
+          147.5000,-42.9500,0
+          147.7000,-43.0500,0
+          147.8000,-43.0800,0
+          147.8499,-43.1355,0
+          147.9167,-43.1000,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟢 亚瑟港→霍巴特（Day7返回）</name>
+      <description>返程约100km，1.5小时</description>
+      <styleUrl>#s-tas-return-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          147.8499,-43.1355,0
+          147.7000,-43.0500,0
+          147.5000,-42.9500,0
+          147.3272,-42.8819,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟢 霍巴特→酒杯湾（Day8）</name>
+      <description>约206km，2.5小时。经Midland Hwy，途经Ross小镇香草蛋糕。</description>
+      <styleUrl>#s-tas-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          147.3272,-42.8819,0
+          147.3706,-42.2986,0
+          147.4882,-41.9961,0
+          147.5500,-42.0500,0
+          147.8691,-42.5484,0
+          148.0734,-42.1229,0
+          148.2000,-42.1200,0
+          148.2857,-42.1189,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟢 酒杯湾→朗塞斯顿（Day9）</name>
+      <description>约230km，约3小时</description>
+      <styleUrl>#s-tas-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          148.2857,-42.1189,0
+          148.0734,-42.1229,0
+          147.8691,-42.5484,0
+          147.5500,-42.0500,0
+          147.4916,-41.9306,0
+          147.4882,-41.9961,0
+          147.3000,-41.7000,0
+          147.1269,-41.4332,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟢 朗塞斯顿→摇篮山（Day9）</name>
+      <description>约150km，约2小时</description>
+      <styleUrl>#s-tas-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          147.1269,-41.4332,0
+          146.6531,-41.5178,0
+          146.3000,-41.6000,0
+          145.9497,-41.6453,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>🟢 摇篮山→霍巴特还车（Day10）</name>
+      <description>约180km，约2.5小时，下午还车</description>
+      <styleUrl>#s-tas-return-line</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          145.9497,-41.6453,0
+          146.3000,-41.6000,0
+          146.6531,-41.5178,0
+          146.2167,-42.1333,0
+          146.7167,-42.4833,0
+          147.0500,-42.7000,0
+          147.3272,-42.8819,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Folder>
+
+</Document>
+</kml>

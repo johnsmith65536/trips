@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google My Maps 导入指南 | 澳大利亚路线</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  background:#f0f4f8; color:#2c3e50; }
+.header { background:linear-gradient(135deg,#1a73e8,#34a853 60%,#fbbc04);
+  color:white; padding:28px 24px 22px; text-align:center; }
+.header h1 { font-size:1.7em; margin-bottom:6px; }
+.header p { font-size:.88em; opacity:.88; }
+.container { max-width:860px; margin:0 auto; padding:24px 14px 40px; }
+
+.step-card { background:white; border-radius:14px; padding:20px 22px;
+  box-shadow:0 2px 12px rgba(0,0,0,.09); margin-bottom:14px;
+  display:flex; gap:16px; }
+.step-num { width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1em; font-weight:800; color:white; margin-top:2px; }
+.step-body { flex:1; }
+.step-title { font-size:1em; font-weight:700; margin-bottom:6px; }
+.step-desc { font-size:.84em; color:#555; line-height:1.6; }
+.step-desc strong { color:#1a73e8; }
+.step-desc code { background:#f0f4f8; padding:2px 6px; border-radius:4px;
+  font-family:monospace; font-size:.9em; color:#c62828; }
+
+.url-box { background:#e8f0fe; border-radius:10px; padding:12px 16px;
+  font-size:.85em; margin:10px 0; border-left:4px solid #1a73e8; }
+.url-box a { color:#1a73e8; font-weight:600; word-break:break-all; }
+
+.tip-box { background:#fff8e1; border-radius:10px; padding:10px 14px;
+  font-size:.82em; margin-top:8px; border-left:4px solid #fbbc04; color:#555; }
+.warn-box { background:#fce4ec; border-radius:10px; padding:10px 14px;
+  font-size:.82em; margin-top:8px; border-left:4px solid #e53935; color:#555; }
+
+.color-legend { background:white; border-radius:14px; padding:18px 20px;
+  box-shadow:0 2px 12px rgba(0,0,0,.09); margin-bottom:14px; }
+.color-legend h3 { font-size:.95em; color:#333; margin-bottom:12px; }
+.cl-row { display:flex; align-items:center; gap:10px; margin-bottom:8px;
+  font-size:.84em; color:#555; }
+.cl-line { width:36px; height:5px; border-radius:3px; flex-shrink:0; }
+
+.action-btn { display:inline-block; background:#1a73e8; color:white;
+  padding:12px 24px; border-radius:8px; font-size:.9em; font-weight:600;
+  text-decoration:none; margin:6px 6px 6px 0; }
+.action-btn:hover { background:#1557b0; }
+.action-btn.green { background:#34a853; }
+.action-btn.green:hover { background:#2d9142; }
+
+.result-preview { background:#f8f9fa; border-radius:12px; padding:16px 18px;
+  margin-top:16px; border:2px dashed #ddd; }
+.result-preview h4 { color:#333; font-size:.9em; margin-bottom:10px; }
+
+.img-placeholder { background:linear-gradient(135deg,#e8f0fe,#e6f4ea);
+  border-radius:10px; padding:40px 20px; text-align:center;
+  color:#5f6368; font-size:.85em; margin:8px 0; border:1px dashed #ccc; }
+.img-placeholder .icon { font-size:2.5em; display:block; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🗺️ Google My Maps 路线导入指南</h1>
+  <p>将 trip_route.kml 导入 Google My Maps，在真实卫星地图上查看完整行程路线</p>
+</div>
+
+<div class="container">
+
+  <!-- 导入步骤 -->
+  <h2 style="font-size:1em;color:#5f6368;margin-bottom:12px;letter-spacing:.5px">📋 导入步骤（约3分钟完成）</h2>
+
+  <div class="step-card">
+    <div class="step-num" style="background:#1a73e8">1</div>
+    <div class="step-body">
+      <div class="step-title">打开 Google My Maps</div>
+      <div class="step-desc">
+        在浏览器中访问 Google My Maps，需要登录 Google 账号（免费）。
+      </div>
+      <div class="url-box">
+        <a href="https://mymaps.google.com" target="_blank">https://mymaps.google.com</a>
+      </div>
+      <div class="tip-box">💡 建议在电脑浏览器打开，手机操作较小</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num" style="background:#1a73e8">2</div>
+    <div class="step-body">
+      <div class="step-title">创建新地图</div>
+      <div class="step-desc">
+        点击左上角 <strong>「+ 创建新地图」</strong> 按钮，进入地图编辑界面。<br>
+        点击顶部 <strong>「无标题地图」</strong> 修改名称，例如：<code>澳大利亚自驾 2026五一</code>
+      </div>
+      <div class="img-placeholder">
+        <span class="icon">🗺️</span>
+        My Maps 创建界面 → 点击「+ 创建新地图」
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num" style="background:#1a73e8">3</div>
+    <div class="step-body">
+      <div class="step-title">导入 KML 文件</div>
+      <div class="step-desc">
+        在左侧图层面板中，点击图层名旁的 <strong>「⋮」（三点菜单）</strong>，选择 <strong>「从文件导入」</strong>。<br><br>
+        在弹出的对话框中，点击 <strong>「从电脑选择文件」</strong>，找到并选择：<br>
+        <code>trip_route.kml</code>（在你的 trips 文件夹中）<br><br>
+        点击 <strong>「打开」</strong>，等待导入完成（约5–10秒）。
+      </div>
+      <div class="tip-box">💡 导入后地图会自动缩放到澳大利亚，显示所有路线和标注点</div>
+      <div class="warn-box">⚠️ 如果提示「文件格式不支持」，确认文件名以 .kml 结尾，不是 .txt</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num" style="background:#34a853">4</div>
+    <div class="step-body">
+      <div class="step-title">查看效果 & 切换底图</div>
+      <div class="step-desc">
+        导入后可以看到：
+        <ul style="margin:8px 0 8px 18px;line-height:1.8">
+          <li>各路线段以不同颜色显示（橙/紫/绿/红）</li>
+          <li>所有景点标注点（点击可查看中文详情）</li>
+          <li>景点按文件夹分组（维多利亚/飞行/塔斯马尼亚）</li>
+        </ul>
+        点击左下角 <strong>「基础地图」→ 「卫星」</strong> 可切换为卫星图，
+        可以清楚看到大洋路的海岸线、塔斯马尼亚的地形。
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num" style="background:#34a853">5</div>
+    <div class="step-body">
+      <div class="step-title">分享地图（可选）</div>
+      <div class="step-desc">
+        点击顶部 <strong>「分享」</strong> 按钮，可以：
+        <ul style="margin:8px 0 8px 18px;line-height:1.8">
+          <li>生成可分享链接，发给朋友/家人</li>
+          <li>获取嵌入代码，放到网页中</li>
+          <li>导出为 KMZ 文件在 Google Earth 打开</li>
+        </ul>
+      </div>
+      <div class="tip-box">💡 分享链接不需要对方有 Google 账号，直接点开即可查看</div>
+    </div>
+  </div>
+
+  <!-- 路线颜色说明 -->
+  <div class="color-legend" style="margin-top:20px">
+    <h3>🎨 KML 路线颜色说明</h3>
+    <div class="cl-row">
+      <div class="cl-line" style="background:#ff9800"></div>
+      <span><strong>橙色实线</strong> — 大洋路驾车路线（Day3，340km）</span>
+    </div>
+    <div class="cl-row">
+      <div class="cl-line" style="background:#ff9800;opacity:.5"></div>
+      <span><strong>橙色虚线</strong> — 内陆返程路（Princes Hwy，Day4）</span>
+    </div>
+    <div class="cl-row">
+      <div class="cl-line" style="background:#9c27b0"></div>
+      <span><strong>紫色实线</strong> — 菲利普岛路线（Day4）</span>
+    </div>
+    <div class="cl-row">
+      <div class="cl-line" style="background:#ef4444"></div>
+      <span><strong>红色线</strong> — 飞行段（深圳↔墨尔本，MEL→HBA）</span>
+    </div>
+    <div class="cl-row">
+      <div class="cl-line" style="background:#2e7d32"></div>
+      <span><strong>绿色实线</strong> — 塔斯马尼亚主要行程路线（Day5–10）</span>
+    </div>
+    <div class="cl-row">
+      <div class="cl-line" style="background:#2e7d32;opacity:.5"></div>
+      <span><strong>绿色虚线</strong> — 塔斯马尼亚返程路（亚瑟港回霍巴特、摇篮山回霍巴特）</span>
+    </div>
+  </div>
+
+  <!-- 标注点说明 -->
+  <div class="color-legend">
+    <h3>📍 标注点图标说明</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:.82em">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:14px;height:14px;background:#4285f4;border-radius:50%"></div>
+        <span>蓝点 — 机场/交通枢纽</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:14px;height:14px;background:#ea4335;border-radius:50%"></div>
+        <span>红点 — 核心必去景点（⭐⭐⭐）</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:14px;height:14px;background:#ff9800;border-radius:50%"></div>
+        <span>橙点 — 大洋路沿线景点</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:14px;height:14px;background:#9c27b0;border-radius:50%"></div>
+        <span>紫点 — 菲利普岛景点</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:14px;height:14px;background:#34a853;border-radius:50%"></div>
+        <span>绿点 — 塔斯马尼亚景点</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:14px;height:14px;background:#fbbc04;border-radius:50%"></div>
+        <span>黄点 — 可选/隐藏景点</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 快速操作区 -->
+  <div style="background:white;border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.09);margin-bottom:14px">
+    <h3 style="font-size:.95em;margin-bottom:12px;color:#333">⚡ 快速操作</h3>
+    <a href="https://mymaps.google.com" target="_blank" class="action-btn">
+      🗺️ 打开 Google My Maps
+    </a>
+    <a href="trip_route.kml" download class="action-btn green">
+      ⬇️ 下载 KML 文件
+    </a>
+    <div class="tip-box" style="margin-top:12px">
+      💡 也可以在 Google Earth（earth.google.com）直接打开 KML 文件，
+      可以看到3D地形效果，摇篮山、大洋路悬崖效果更震撼。
+    </div>
+  </div>
+
+  <!-- KML 包含内容摘要 -->
+  <div style="background:white;border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.09)">
+    <h3 style="font-size:.95em;margin-bottom:14px;color:#333">📊 KML 文件包含内容摘要</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:.83em">
+      <div style="background:#e8f0fe;border-radius:8px;padding:10px 12px">
+        <strong style="color:#1a73e8">📍 标注点（共23处）</strong><br>
+        墨尔本·霍巴特·十二门徒·企鹅岛<br>
+        酒杯湾·摇篮山·亚瑟港·MONA<br>
+        考拉·海豹·威士忌·网红蛋糕…
+      </div>
+      <div style="background:#e6f4ea;border-radius:8px;padding:10px 12px">
+        <strong style="color:#34a853">📏 路线段（共14段）</strong><br>
+        大洋路驾车·内陆返程·菲利普岛<br>
+        飞行弧线3段·塔州6段路线<br>
+        总里程约1,636km
+      </div>
+      <div style="background:#fef3e2;border-radius:8px;padding:10px 12px">
+        <strong style="color:#ea8600">📁 文件夹结构（3个）</strong><br>
+        第一章：维多利亚州 Day2–5<br>
+        飞行段<br>
+        第二章：塔斯马尼亚 Day5–10
+      </div>
+      <div style="background:#fce8e6;border-radius:8px;padding:10px 12px">
+        <strong style="color:#c62828">💬 每个标注点含详细说明</strong><br>
+        门票·预约链接·注意事项<br>
+        最佳时间·特色描述<br>
+        中文，点击即可查看
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
