@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>③ 景点场景图鉴 | 澳大利亚 2026五一</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  background:#f2f6fa; color:#2c3e50; }
+.header { background:linear-gradient(135deg,#0077b6,#00b4d8 55%,#48cae4);
+  color:white; padding:28px 24px 22px; text-align:center; }
+.header h1 { font-size:1.7em; margin-bottom:6px; }
+.header p { font-size:.87em; opacity:.85; }
+
+.container { max-width:1200px; margin:0 auto; padding:20px 14px 36px; }
+.section-label { font-size:.8em; font-weight:700; letter-spacing:1px;
+  color:white; padding:4px 12px; border-radius:14px; margin-bottom:14px;
+  display:inline-block; }
+
+.scene-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px; margin-bottom:28px; }
+
+.scene-card {
+  background:white; border-radius:14px; overflow:hidden;
+  box-shadow:0 3px 14px rgba(0,0,0,.1); transition:transform .2s;
+}
+.scene-card:hover { transform:translateY(-3px); }
+
+.sc-visual {
+  height:130px; display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.sc-icon { font-size:4em; z-index:1; }
+.sc-day-badge {
+  position:absolute; top:10px; left:12px;
+  background:rgba(0,0,0,.5); color:white; font-size:.72em;
+  font-weight:600; padding:3px 9px; border-radius:10px;
+}
+.sc-star {
+  position:absolute; top:10px; right:12px;
+  font-size:.85em;
+}
+.sc-body { padding:12px 14px 14px; }
+.sc-name { font-size:1em; font-weight:700; margin-bottom:4px; }
+.sc-location { font-size:.76em; color:#888; margin-bottom:8px; }
+.sc-desc { font-size:.82em; color:#555; line-height:1.55; margin-bottom:10px; }
+.sc-meta { display:flex; flex-wrap:wrap; gap:6px; }
+.meta-chip { font-size:.72em; padding:3px 9px; border-radius:10px;
+  font-weight:500; }
+.chip-time { background:#e3f2fd; color:#1565c0; }
+.chip-tip { background:#fff8e1; color:#e65100; }
+.chip-price { background:#e8f5e9; color:#2e7d32; }
+.chip-warn { background:#fce4ec; color:#c62828; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📸 景点场景图鉴</h1>
+  <p>16个核心景点 · 场景描述 · 最佳时间 · 实战拍摄贴士</p>
+</div>
+
+<div class="container">
+
+  <!-- 大洋路 -->
+  <div class="section-label" style="background:#e65100">🌊 大洋路段（Day 3–4）</div>
+  <div class="scene-grid">
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#1565c0,#42a5f5)">
+        <div class="sc-icon">🏁</div>
+        <div class="sc-day-badge">Day3 上午</div>
+        <div class="sc-star">📍起点</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">大洋路纪念拱门 · 托尔博</div>
+        <div class="sc-location">Torquay, VIC · 墨尔本西南90km</div>
+        <div class="sc-desc">大洋路官方起点，标志性石砌纪念拱门。
+          这条276km公路由一战退伍老兵1932年亲手修建，
+          是世界最长战争纪念碑。背后是蔚蓝南大洋。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 停留15分钟</span>
+          <span class="meta-chip chip-tip">📷 对着拱门拍，背景是海</span>
+          <span class="meta-chip chip-price">免费</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#2e7d32,#66bb6a)">
+        <div class="sc-icon">🐨</div>
+        <div class="sc-day-badge">Day3 上午</div>
+        <div class="sc-star">⭐⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">肯内特河路边野生考拉</div>
+        <div class="sc-location">Kennett River, VIC · 阿波罗湾前15km</div>
+        <div class="sc-desc">沿Grey River Road路边的桉树上，极大概率发现
+          野生考拉蜷缩在树叉处睡觉。完全免费，距离极近，
+          是全程最原生态的动物邂逅，胜过任何动物园。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 停留30分钟</span>
+          <span class="meta-chip chip-tip">📷 仰拍树梢，注意逆光</span>
+          <span class="meta-chip chip-price">完全免费</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#00695c,#26a69a)">
+        <div class="sc-icon">🐟</div>
+        <div class="sc-day-badge">Day3 中午</div>
+        <div class="sc-star">🍽️</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">阿波罗湾渔民合作社</div>
+        <div class="sc-location">Apollo Bay, VIC · 距十二门徒90km</div>
+        <div class="sc-desc">渔民码头直销海鲜——龙虾、鲍鱼、鱼排。
+          背靠绿色山丘，面向渔港。这也是大洋路西行前
+          最后一个可靠加油站和补给点。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 停留1小时</span>
+          <span class="meta-chip chip-warn">⚠️ 此处必须加满油！</span>
+          <span class="meta-chip chip-price">AUD 30–60/份</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#bf360c,#ff7043)">
+        <div class="sc-icon">🏛️</div>
+        <div class="sc-day-badge">Day3 下午</div>
+        <div class="sc-star">⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">洛克阿德峡谷</div>
+        <div class="sc-location">Loch Ard Gorge, VIC</div>
+        <div class="sc-desc">以1878年沉船命名。深红色悬崖从两侧夹成峡谷，
+          碧绿海水涌入白色沙滩，形成色彩对比极强的景观。
+          推荐走Island Archway和Blowhole两条短线。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 停留1–1.5小时</span>
+          <span class="meta-chip chip-tip">📷 峡谷口俯拍最佳</span>
+          <span class="meta-chip chip-price">免费</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#e65100,#ffa726)">
+        <div class="sc-icon">🗿</div>
+        <div class="sc-day-badge">Day3 16:30</div>
+        <div class="sc-star">⭐⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">十二门徒日落</div>
+        <div class="sc-location">Twelve Apostles, Port Campbell NP</div>
+        <div class="sc-desc">石灰岩海蚀柱矗立于汹涌南大洋，5月日落约17:15。
+          夕阳将石柱染成橙金色，海浪在基部爆裂成白色浪花。
+          站在观景台上，整个大洋路的震撼在此刻推向顶峰。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 16:30前到达</span>
+          <span class="meta-chip chip-tip">🚁 直升机AUD195/人</span>
+          <span class="meta-chip chip-price">免费（直升机另计）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#4a148c,#ab47bc)">
+        <div class="sc-icon">🐧</div>
+        <div class="sc-day-badge">Day4 日落后</div>
+        <div class="sc-star">⭐⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">小蓝企鹅归巢仪式</div>
+        <div class="sc-location">Phillip Island · 萨摩兰海滩</div>
+        <div class="sc-desc">全球体型最小的企鹅（体长33cm）每晚从大海归来，
+          成群结队摇摇摆摆爬上岸。数百人安静屏息，
+          只有海浪声和企鹅轻声叫唤，是整段旅程最治愈的记忆。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ ~19:30 开始</span>
+          <span class="meta-chip chip-warn">⚠️ 绝对禁止闪光灯！</span>
+          <span class="meta-chip chip-price">AUD 30–35/人</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 霍巴特 -->
+  <div class="section-label" style="background:#0097a7">🏙 霍巴特城市（Day 5–7）</div>
+  <div class="scene-grid">
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#bf8900,#fdd835)">
+        <div class="sc-icon">🏪</div>
+        <div class="sc-day-badge">Day6 上午</div>
+        <div class="sc-star">📍必去</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">萨拉曼卡广场</div>
+        <div class="sc-location">Salamanca Place, Hobart</div>
+        <div class="sc-desc">19世纪金色沙岩仓库改建的文艺街区。
+          周六有萨拉曼卡市集（300+摊位，8–15点），
+          出售本地艺术品、手工皂、塔州薰衣草产品。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 1–2小时</span>
+          <span class="meta-chip chip-tip">📅 周六来赶集市最佳</span>
+          <span class="meta-chip chip-price">免费逛</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#1a237e,#5c6bc0)">
+        <div class="sc-icon">⛰️</div>
+        <div class="sc-day-badge">Day6 中午</div>
+        <div class="sc-star">⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">威灵顿山顶</div>
+        <div class="sc-location">kunanyi / Mt. Wellington · 海拔1271m</div>
+        <div class="sc-desc">自驾30分钟盘山路直达山顶。
+          俯瞰整个霍巴特、达尔文港和塔斯曼半岛全景。
+          5月可能有积雪，山顶接近0°C。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 1–1.5小时</span>
+          <span class="meta-chip chip-warn">⚠️ 带冲锋衣+手套</span>
+          <span class="meta-chip chip-price">免费</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#37474f,#78909c)">
+        <div class="sc-icon">🎨</div>
+        <div class="sc-day-badge">Day6 下午</div>
+        <div class="sc-star">⭐⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">MONA（古老与新艺术博物馆）</div>
+        <div class="sc-location">Berriedale, Hobart · 渡轮20分钟</div>
+        <div class="sc-desc">建于地下砂岩洞穴中的私人博物馆，
+          展品极度前卫——会消化食物的机器、装置艺术……
+          乘坐复古渡轮前往，船本身就是艺术品。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 3–4小时</span>
+          <span class="meta-chip chip-warn">⚠️ 每周二闭馆！</span>
+          <span class="meta-chip chip-price">AUD 35/人</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#3e2723,#8d6e63)">
+        <div class="sc-icon">⛓️</div>
+        <div class="sc-day-badge">Day7 下午</div>
+        <div class="sc-star">⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">亚瑟港世界遗产</div>
+        <div class="sc-location">Port Arthur Historic Site · 世界遗产</div>
+        <div class="sc-desc">19世纪英国流放罪犯的监狱殖民地，
+          哥特式教堂残骸、砖砌监狱矗立在翠绿草坪，
+          宏伟而肃穆。港湾游船可靠泊死亡岛（流放地墓地）。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 4–5小时</span>
+          <span class="meta-chip chip-tip">🎧 租用语音导览</span>
+          <span class="meta-chip chip-price">AUD 45/人（含游船）</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 塔斯马尼亚自然 -->
+  <div class="section-label" style="background:#2e7d32">🌿 塔斯马尼亚自然（Day 8–10）</div>
+  <div class="scene-grid">
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#1565c0,#42a5f5,#e0f7fa)">
+        <div class="sc-icon">🍷</div>
+        <div class="sc-day-badge">Day8 下午</div>
+        <div class="sc-star">⭐⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">酒杯湾（Wineglass Bay）</div>
+        <div class="sc-location">Freycinet NP · 霍巴特东北206km</div>
+        <div class="sc-desc">完美的弯月形白沙滩被粉红花岗岩山脉（Hazards）
+          环抱，蔚蓝海湾从山顶俯瞰形如酒杯。
+          5月游客极少，几乎可以包场独享。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 2–4小时步道</span>
+          <span class="meta-chip chip-tip">📷 上山顶俯瞰角度</span>
+          <span class="meta-chip chip-price">AUD 50/辆（公园通票）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#4e342e,#a1887f,#bcaaa4)">
+        <div class="sc-icon">🌊</div>
+        <div class="sc-day-badge">Day7 顺路</div>
+        <div class="sc-star">隐藏</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">塔斯曼弓 + 魔鬼厨房</div>
+        <div class="sc-location">Tasman NP · 亚瑟港10分钟车程</div>
+        <div class="sc-desc">天然石拱横跨百米深渊（塔斯曼弓），
+          狭长竖缝中海浪涌入发出轰鸣（魔鬼厨房），
+          弓形洞口框住远处大洋（奇妙岩洞）。三处紧挨着。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 45分钟三合一</span>
+          <span class="meta-chip chip-tip">📷 魔鬼厨房喷水时拍</span>
+          <span class="meta-chip chip-price">免费（公园通票已含）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#1b5e20,#43a047,#a5d6a7)">
+        <div class="sc-icon">🦫</div>
+        <div class="sc-day-badge">Day9–10</div>
+        <div class="sc-star">⭐⭐⭐</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">摇篮山 · 鸽子湖倒影</div>
+        <div class="sc-location">Cradle Mountain-Lake St Clair NP</div>
+        <div class="sc-desc">锯齿状摇篮山倒映在平静鸽子湖面，
+          5月秋色金黄，环湖栈道6km平坦易行。
+          清晨常见野生袋熊在草地觅食，极度治愈。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 鸽子湖环线2.5h</span>
+          <span class="meta-chip chip-tip">📷 日出时湖面最平静</span>
+          <span class="meta-chip chip-price">包含在公园通票</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#0d47a1,#1565c0,#0a1a4a)">
+        <div class="sc-icon">🌌</div>
+        <div class="sc-day-badge">Day9 夜间</div>
+        <div class="sc-star">彩蛋</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">南极光（Aurora Australis）</div>
+        <div class="sc-location">摇篮山湖边 / 霍巴特以南</div>
+        <div class="sc-desc">5月是塔斯马尼亚极光季开始，
+          Kp≥4时有机会在21:00–凌晨02:00看到南极光。
+          这是夏季游客完全没有的独家福利。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-tip">📱 装Aurora Service Australia</span>
+          <span class="meta-chip chip-time">⏱ 不可预测</span>
+          <span class="meta-chip chip-price">免费（看运气）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#e65100,#ff8f00,#ffe082)">
+        <div class="sc-icon">🦁</div>
+        <div class="sc-day-badge">Day3/Day9</div>
+        <div class="sc-star">隐藏</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">火焰湾（Bay of Fires）</div>
+        <div class="sc-location">东塔斯马尼亚 · 弗雷西内北2h</div>
+        <div class="sc-desc">橙色地衣覆盖的花岗岩巨石+白沙滩+碧绿海水，
+          被Lonely Planet评为"全球最热目的地"之一，
+          但中国游客知道率极低。时间充裕可增加1天。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 建议住一夜</span>
+          <span class="meta-chip chip-tip">📷 巨石+海水+秋光</span>
+          <span class="meta-chip chip-price">免费（有野营地）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#00695c,#00897b,#80cbc4)">
+        <div class="sc-icon">🥃</div>
+        <div class="sc-day-badge">Day6 傍晚</div>
+        <div class="sc-star">🏆</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">Lark / Sullivan's Cove 威士忌</div>
+        <div class="sc-location">Hobart市区 品鉴室</div>
+        <div class="sc-desc">塔斯马尼亚威士忌已多次荣获世界大奖。
+          Lark Distillery品鉴室有AUD20–40套餐，
+          配威士忌巧克力，情侣下午茶首选体验。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 1–1.5小时</span>
+          <span class="meta-chip chip-tip">🎁 伴手礼必买！</span>
+          <span class="meta-chip chip-price">AUD 20–40/套餐</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 观鲸 -->
+  <div class="section-label" style="background:#1565c0">🐋 5月专属隐藏体验</div>
+  <div class="scene-grid">
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#01579b,#0288d1,#b3e5fc)">
+        <div class="sc-icon">🐋</div>
+        <div class="sc-day-badge">Day4 可顺路</div>
+        <div class="sc-star">5月专属</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">沃南布尔观鲸台</div>
+        <div class="sc-location">Warrnambool · 十二门徒西62km</div>
+        <div class="sc-desc">5月南露脊鲸回到维多利亚海岸繁殖，
+          Logan's Beach专设观鲸台，可直接免费看到鲸鱼育幼、喷水。
+          夏季旺季游客完全没有这个机会。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 30–60分钟</span>
+          <span class="meta-chip chip-tip">📅 仅5–9月可见</span>
+          <span class="meta-chip chip-price">完全免费</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#880e4f,#c62828,#ef9a9a)">
+        <div class="sc-icon">👻</div>
+        <div class="sc-day-badge">Day7 夜间</div>
+        <div class="sc-star">情侣必选</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">亚瑟港幽灵之旅</div>
+        <div class="sc-location">Port Arthur Historic Site · 夜间</div>
+        <div class="sc-desc">工作人员穿维多利亚时代服装，手持灯笼，
+          带领穿越废墟、进入昏暗监狱，讲述真实历史和灵异传说。
+          气氛极度渲染，情侣互相依偎的最佳场合。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 约1.5小时</span>
+          <span class="meta-chip chip-warn">⚠️ 需提前官网预约</span>
+          <span class="meta-chip chip-price">AUD 30/人</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="sc-visual" style="background:linear-gradient(135deg,#004d40,#00695c,#a7ffeb)">
+        <div class="sc-icon">🛶</div>
+        <div class="sc-day-badge">Day10 早晨</div>
+        <div class="sc-star">情侣必选</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">Peppers Lodge 壁炉木屋</div>
+        <div class="sc-location">Cradle Mountain · 园内唯一酒店</div>
+        <div class="sc-desc">木屋配壁炉和露天热水浴缸，
+          在摇篮山星空下泡露天温泉，
+          是整个五一行程浪漫度的天花板体验。</div>
+        <div class="sc-meta">
+          <span class="meta-chip chip-time">⏱ 住一晚</span>
+          <span class="meta-chip chip-warn">⚠️ 提前2-3月预订</span>
+          <span class="meta-chip chip-price">AUD 300–500/晚</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 快速参考表 -->
+  <div style="background:white;border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.09);margin-top:8px">
+    <h3 style="color:#0077b6;margin-bottom:14px;font-size:1em">📊 全程景点快速参考</h3>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.81em">
+      <thead>
+        <tr style="background:#e3f2fd">
+          <th style="padding:8px 12px;text-align:left;color:#1565c0">景点</th>
+          <th style="padding:8px 12px;text-align:left;color:#1565c0">Day</th>
+          <th style="padding:8px 12px;text-align:left;color:#1565c0">门票</th>
+          <th style="padding:8px 12px;text-align:left;color:#1565c0">最佳时间</th>
+          <th style="padding:8px 12px;text-align:left;color:#1565c0">需预约</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-top:1px solid #eee"><td style="padding:7px 12px">🗿 十二门徒</td><td>Day3</td><td>免费</td><td>日落16:30–17:30</td><td>直升机需预约</td></tr>
+        <tr style="border-top:1px solid #eee"><td style="padding:7px 12px">🐧 企鹅归巢</td><td>Day4</td><td>AUD30–35</td><td>日落后~19:30</td><td>建议提前预约</td></tr>
+        <tr style="border-top:1px solid #eee"><td style="padding:7px 12px">🎨 MONA博物馆</td><td>Day6</td><td>AUD35</td><td>全天（周二关）</td><td>无需，但周二关！</td></tr>
+        <tr style="border-top:1px solid #eee"><td style="padding:7px 12px">⛓️ 亚瑟港遗址</td><td>Day7</td><td>AUD45</td><td>全天</td><td>幽灵之旅需预约</td></tr>
+        <tr style="border-top:1px solid #eee"><td style="padding:7px 12px">🍷 酒杯湾</td><td>Day8</td><td>AUD50/车</td><td>上午光线最佳</td><td>无需</td></tr>
+        <tr style="border-top:1px solid #eee"><td style="padding:7px 12px">⛰️ 摇篮山</td><td>Day9–10</td><td>含在通票</td><td>早8:30出发</td><td>Peppers住宿需预约</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

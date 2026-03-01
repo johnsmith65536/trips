@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>② 行程时间轴 | 澳大利亚 2026五一</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  background:#f0f4f8; color:#2c3e50; }
+.header { background:linear-gradient(135deg,#0077b6,#00b4d8 60%,#48cae4);
+  color:white; padding:28px 24px 22px; text-align:center; }
+.header h1 { font-size:1.7em; margin-bottom:6px; }
+.header p { font-size:.88em; opacity:.85; }
+.container { max-width:1200px; margin:0 auto; padding:20px 14px 32px; }
+
+/* ── PHASE BADGES ── */
+.phases { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+.phase-badge { padding:6px 14px; border-radius:20px; font-size:.82em; font-weight:600;
+  color:white; display:flex; align-items:center; gap:6px; }
+
+/* ── GANTT ── */
+.gantt-wrap { background:white; border-radius:14px; overflow-x:auto;
+  box-shadow:0 2px 12px rgba(0,0,0,.09); margin-bottom:18px; }
+.gantt-inner { min-width:900px; padding:18px 20px 14px; }
+.gantt-days { display:grid; grid-template-columns: 80px repeat(11,1fr);
+  margin-bottom:6px; }
+.gantt-days .dlabel { font-size:.72em; text-align:center; color:#666; padding:0 2px; }
+.gantt-days .corner { font-size:.72em; color:#999; }
+.gantt-row { display:grid; grid-template-columns:80px repeat(11,1fr);
+  align-items:center; margin-bottom:4px; min-height:32px; }
+.row-label { font-size:.75em; color:#555; padding-right:8px; text-align:right;
+  line-height:1.3; }
+.cell { position:relative; height:28px; }
+.bar { position:absolute; top:3px; bottom:3px; border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.72em; font-weight:600; color:white; white-space:nowrap;
+  overflow:hidden; padding:0 6px; }
+.gantt-divider { grid-column:1/-1; border-top:1px solid #eee; margin:4px 0; }
+
+/* ── DAY CARDS ── */
+.day-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:12px; margin-top:18px; }
+.day-card { background:white; border-radius:12px; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.09); }
+.dc-header { padding:10px 14px; color:white; display:flex;
+  justify-content:space-between; align-items:center; }
+.dc-date { font-size:.8em; opacity:.85; }
+.dc-day { font-size:1em; font-weight:700; }
+.dc-body { padding:10px 14px 12px; font-size:.82em; }
+.act { display:flex; align-items:flex-start; gap:8px; margin-bottom:7px; }
+.act-time { font-size:.75em; color:#888; min-width:44px; flex-shrink:0;
+  padding-top:1px; }
+.act-text { color:#444; line-height:1.4; }
+.act-text strong { color:#1a1a2e; }
+.tag { display:inline-block; font-size:.7em; padding:1px 6px; border-radius:8px;
+  color:white; margin-left:4px; vertical-align:middle; }
+.drive-bar { background:#f5f5f5; border-radius:6px; padding:5px 10px;
+  font-size:.77em; color:#666; display:flex; align-items:center; gap:6px;
+  margin-top:6px; }
+
+/* colors */
+.c-mel { background:#0077b6; }
+.c-gor { background:#e65100; }
+.c-phi { background:#7b1fa2; }
+.c-tas { background:#00695c; }
+.c-fly { background:#c62828; }
+.c-rest { background:#546e7a; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📅 11天行程时间轴</h1>
+  <p>大洋路 × 菲利普岛 × 塔斯马尼亚 | 2026年4月25日—5月5日</p>
+</div>
+
+<div class="container">
+  <div class="phases">
+    <div class="phase-badge c-fly">✈ 飞行段</div>
+    <div class="phase-badge c-mel">🏙 墨尔本 Day1–2</div>
+    <div class="phase-badge c-gor">🌊 大洋路 Day3</div>
+    <div class="phase-badge c-phi">🐧 菲利普岛 Day4</div>
+    <div class="phase-badge" style="background:#0097a7">🏛 霍巴特 Day5–7</div>
+    <div class="phase-badge" style="background:#2e7d32">🌿 塔州自驾 Day8–10</div>
+  </div>
+
+  <!-- Gantt -->
+  <div class="gantt-wrap">
+    <div class="gantt-inner">
+      <div class="gantt-days">
+        <div class="corner">活动类型</div>
+        <div class="dlabel">D1<br>4/25</div>
+        <div class="dlabel">D2<br>4/26</div>
+        <div class="dlabel">D3<br>4/27</div>
+        <div class="dlabel">D4<br>4/28</div>
+        <div class="dlabel">D5<br>4/29</div>
+        <div class="dlabel">D6<br>4/30</div>
+        <div class="dlabel">D7<br>5/1</div>
+        <div class="dlabel">D8<br>5/2</div>
+        <div class="dlabel">D9<br>5/3</div>
+        <div class="dlabel">D10<br>5/4</div>
+        <div class="dlabel">D11<br>5/5</div>
+      </div>
+
+      <!-- 飞行 -->
+      <div class="gantt-row">
+        <div class="row-label">✈ 飞行</div>
+        <div class="cell"><div class="bar c-fly" style="left:0;right:0">深圳→墨尔本 10.5h</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar c-fly" style="left:50%;right:0">MEL→HBA</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar c-fly" style="left:50%;right:0">HBA→深圳</div></div>
+        <div class="cell"><div class="bar c-fly" style="left:0;right:0">返程中</div></div>
+      </div>
+
+      <!-- 自驾 -->
+      <div class="gantt-row">
+        <div class="row-label">🚗 自驾</div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar c-mel" style="left:0;right:60%">取车</div></div>
+        <div class="cell"><div class="bar c-gor" style="left:0;right:0">大洋路340km</div></div>
+        <div class="cell"><div class="bar c-gor" style="left:0;right:0">内陆路290km</div></div>
+        <div class="cell"><div class="bar c-mel" style="left:0;right:60%">还车</div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">亚瑟港往返200km</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">霍→弗雷西内206km</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">→摇篮山280km</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">→霍巴特180km</div></div>
+        <div class="cell"></div>
+      </div>
+
+      <div class="gantt-row"><div class="gantt-divider"></div></div>
+
+      <!-- 自然景观 -->
+      <div class="gantt-row">
+        <div class="row-label">🌊 自然</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar c-gor" style="left:0;right:0">考拉·十二门徒日落</div></div>
+        <div class="cell"><div class="bar c-phi" style="left:0;right:30%">诺比斯角</div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">威灵顿山俯瞰</div></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:30%;right:0">塔斯曼弓</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">酒杯湾徒步</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">鸽子湖·袋熊</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:30%">鸽子湖环形步道</div></div>
+        <div class="cell"></div>
+      </div>
+
+      <!-- 文化/历史 -->
+      <div class="gantt-row">
+        <div class="row-label">🏛 文化</div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar c-mel" style="left:50%;right:0">联邦广场</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:60%;right:0">萨拉曼卡</div></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">萨拉曼卡+MONA</div></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">亚瑟港遗址</div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:60%;right:0">Boag's啤酒厂</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+
+      <!-- 动物 -->
+      <div class="gantt-row">
+        <div class="row-label">🐾 动物</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#f57c00;left:20%;right:40%">路边考拉</div></div>
+        <div class="cell"><div class="bar c-phi" style="left:0;right:0">考拉中心·海豹·🐧企鹅</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:70%;right:0">袋熊</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:60%;right:0">野生袋熊</div></div>
+        <div class="cell"></div>
+      </div>
+
+      <!-- 夜间活动 -->
+      <div class="gantt-row">
+        <div class="row-label">🌙 夜间</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar c-phi" style="left:60%;right:0">🐧企鹅归巢</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#37474f;left:60%;right:0">👻幽灵之旅</div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="bar" style="background:#1a237e;left:70%;right:0">🌌星空/极光?</div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+
+      <!-- 住宿 -->
+      <div class="gantt-row">
+        <div class="row-label">🏨 住宿</div>
+        <div class="cell"><div class="bar c-fly" style="left:0;right:0">机上</div></div>
+        <div class="cell"><div class="bar c-mel" style="left:0;right:0">墨尔本市区</div></div>
+        <div class="cell"><div class="bar c-gor" style="left:0;right:0">坎贝尔港·听浪</div></div>
+        <div class="cell"><div class="bar c-phi" style="left:0;right:0">菲利普岛</div></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">霍巴特精品酒店</div></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">霍巴特（连住）</div></div>
+        <div class="cell"><div class="bar" style="background:#0097a7;left:0;right:0">霍巴特（连住）</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">Freycinet Lodge</div></div>
+        <div class="cell"><div class="bar" style="background:#2e7d32;left:0;right:0">Peppers摇篮山🔥</div></div>
+        <div class="cell"><div class="bar c-fly" style="left:60%;right:0">机上</div></div>
+        <div class="cell"><div class="bar c-fly" style="left:0;right:0">机上/到家</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day Cards -->
+  <h3 style="color:#0077b6;margin-bottom:12px;font-size:1.05em">📋 逐日行程卡片</h3>
+  <div class="day-grid">
+
+    <div class="day-card">
+      <div class="dc-header c-fly">
+        <div class="dc-day">Day 1 · 出发日</div>
+        <div class="dc-date">4月25日 (六) ANZAC Day</div>
+      </div>
+      <div class="dc-body">
+        <div class="act">
+          <div class="act-time">全天</div>
+          <div class="act-text"><strong>深圳/广州 → 墨尔本</strong>，飞行约10.5小时</div>
+        </div>
+        <div class="act">
+          <div class="act-time">注意</div>
+          <div class="act-text">ANZAC Day，部分商店关闭，抵达后直接休息</div>
+        </div>
+        <div class="drive-bar">⚠️ 第二天05:30需出发大洋路，务必保证睡眠</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header c-mel">
+        <div class="dc-day">Day 2 · 抵达墨尔本</div>
+        <div class="dc-date">4月26日 (日)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act">
+          <div class="act-time">上午</div>
+          <div class="act-text">抵达MEL机场，取租车（Hertz/Avis）</div>
+        </div>
+        <div class="act">
+          <div class="act-time">下午</div>
+          <div class="act-text">联邦广场·弗林德斯街站打卡，喝Flat White</div>
+        </div>
+        <div class="act">
+          <div class="act-time">晚上</div>
+          <div class="act-text"><strong>早睡！</strong>明天05:30出发</div>
+        </div>
+        <div class="drive-bar">🏨 Mantra on Russell / Holiday Inn</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header c-gor">
+        <div class="dc-day">Day 3 · 大洋路精华</div>
+        <div class="dc-date">4月27日 (一)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">05:30</div><div class="act-text">出发！墨尔本→大洋路</div></div>
+        <div class="act"><div class="act-time">上午</div><div class="act-text">托尔博起点拍照→安格尔西袋鼠→<strong>肯内特河考拉★</strong></div></div>
+        <div class="act"><div class="act-time">12:00</div><div class="act-text">阿波罗湾渔港午餐 + <strong>加满油！</strong></div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text">洛克阿德峡谷→吉布森石阶→群岛湾</div></div>
+        <div class="act"><div class="act-time">16:30</div><div class="act-text"><strong>十二门徒日落 ★★★</strong>（可选直升机AUD195/人）</div></div>
+        <div class="drive-bar">🏨 坎贝尔港 Southern Ocean Motor Inn</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header c-phi">
+        <div class="dc-day">Day 4 · 菲利普岛</div>
+        <div class="dc-date">4月28日 (二)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">07:00</div><div class="act-text">坎贝尔港出发，走Princes Hwy内陆路</div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text">考拉保育中心→诺比斯角海豹礁→萨摩兰海滩</div></div>
+        <div class="act"><div class="act-time">日落后</div><div class="act-text"><strong>小企鹅归巢 ★★★</strong>（~19:30，AUD30-35）</div></div>
+        <div class="drive-bar">🏨 菲利普岛 Ramada / The Island</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header" style="background:#0097a7">
+        <div class="dc-day">Day 5 · 飞往塔斯马尼亚</div>
+        <div class="dc-date">4月29日 (三)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">上午</div><div class="act-text">菲利普岛→墨尔本（1.5h），还车</div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text">✈ 飞霍巴特（Jetstar/Qantas，约70分钟）</div></div>
+        <div class="act"><div class="act-time">傍晚</div><div class="act-text">取新租车，萨拉曼卡广场晚餐</div></div>
+        <div class="drive-bar">🏨 Henry Jones Art Hotel（由果酱厂改建）</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header" style="background:#0097a7">
+        <div class="dc-day">Day 6 · 霍巴特深度</div>
+        <div class="dc-date">4月30日 (四)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">上午</div><div class="act-text">萨拉曼卡广场→Battery Point老街</div></div>
+        <div class="act"><div class="act-time">中午</div><div class="act-text"><strong>威灵顿山顶俯瞰</strong>（海拔1271m，可能有积雪）</div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text"><strong>MONA地下博物馆</strong>（乘渡轮前往，周二闭馆！）</div></div>
+        <div class="act"><div class="act-time">傍晚</div><div class="act-text">Lark Distillery威士忌品鉴</div></div>
+        <div class="drive-bar">🏨 霍巴特市区（连住）</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header" style="background:#37474f">
+        <div class="dc-day">Day 7 · 亚瑟港</div>
+        <div class="dc-date">5月1日 (五) 劳动节</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">上午</div><div class="act-text">霍巴特出发→亚瑟港（1.5h）</div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text"><strong>亚瑟港世界遗址</strong>（AUD45，含港湾游船）</div></div>
+        <div class="act"><div class="act-time">顺路</div><div class="act-text">塔斯曼弓·魔鬼厨房·奇妙岩洞</div></div>
+        <div class="act"><div class="act-time">夜间</div><div class="act-text"><strong>👻幽灵之旅</strong>（AUD30，需预约）</div></div>
+        <div class="drive-bar">🏨 返回霍巴特</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header" style="background:#2e7d32">
+        <div class="dc-day">Day 8 · 酒杯湾</div>
+        <div class="dc-date">5月2日 (六)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">上午</div><div class="act-text">霍巴特出发→弗雷西内（2.5h），Ross小镇香草蛋糕</div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text"><strong>酒杯湾观景台步道</strong>（2.5km往返，爬升300m）★★★</div></div>
+        <div class="act"><div class="act-time">可选</div><div class="act-text">走下沙滩，独享无人海湾（+1.5h）</div></div>
+        <div class="drive-bar">🏨 Freycinet Lodge（国家公园内木屋）</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header" style="background:#1b5e20">
+        <div class="dc-day">Day 9 · 摇篮山</div>
+        <div class="dc-date">5月3日 (日)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">上午</div><div class="act-text">Coles Bay出发→朗塞斯顿（2.5h）</div></div>
+        <div class="act"><div class="act-time">中午</div><div class="act-text">朗塞斯顿：Boag's啤酒厂·卡塔拉克特峡谷</div></div>
+        <div class="act"><div class="act-time">下午</div><div class="act-text">抵达摇篮山，轻松步道，找<strong>野生袋熊</strong></div></div>
+        <div class="act"><div class="act-time">傍晚</div><div class="act-text"><strong>鸽子湖倒影+壁炉木屋</strong>（可能看极光）</div></div>
+        <div class="drive-bar">🏨 Peppers Cradle Mountain Lodge 🔥</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header" style="background:#2e7d32">
+        <div class="dc-day">Day 10 · 返程日</div>
+        <div class="dc-date">5月4日 (一)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act"><div class="act-time">08:30</div><div class="act-text"><strong>鸽子湖环形步道</strong>（6km，2.5h，全程平坦）★★</div></div>
+        <div class="act"><div class="act-time">午后</div><div class="act-text">驾车返霍巴特（2.5h），还车</div></div>
+        <div class="act"><div class="act-time">傍晚</div><div class="act-text">码头最后一顿海鲜，买Sullivan's Cove威士忌</div></div>
+        <div class="act"><div class="act-time">深夜</div><div class="act-text">✈ 飞回深圳（经中转）</div></div>
+        <div class="drive-bar">🏨 机上（飞行中）</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="dc-header c-fly">
+        <div class="dc-day">Day 11 · 回家</div>
+        <div class="dc-date">5月5日 (二)</div>
+      </div>
+      <div class="dc-body">
+        <div class="act">
+          <div class="act-time">全天</div>
+          <div class="act-text">飞行返程中（约12–16小时含中转）</div>
+        </div>
+        <div class="act">
+          <div class="act-time">抵达</div>
+          <div class="act-text">深圳宝安机场，假期圆满收官</div>
+        </div>
+        <div class="drive-bar">🎉 带回：威士忌·奶酪·生蚝·蜂蜜</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 密度分析 -->
+  <div style="background:white;border-radius:14px;padding:18px 20px;margin-top:18px;box-shadow:0 2px 12px rgba(0,0,0,.09)">
+    <h3 style="color:#0077b6;margin-bottom:14px;font-size:1em">⚖️ 行程节奏密度分析</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;font-size:.83em">
+      <div style="background:#fff8e1;border-radius:8px;padding:10px 12px;border-left:4px solid #ff9800">
+        <strong>高强度日（2天）</strong><br>
+        Day3 大洋路 — 需05:30出发，全天12+小时<br>
+        Day7 亚瑟港+幽灵之旅 — 夜间回返
+      </div>
+      <div style="background:#e8f5e9;border-radius:8px;padding:10px 12px;border-left:4px solid #4caf50">
+        <strong>中等节奏（5天）</strong><br>
+        Day4·6·8·9·10 — 可自由调整停留时间
+      </div>
+      <div style="background:#e3f2fd;border-radius:8px;padding:10px 12px;border-left:4px solid #2196f3">
+        <strong>轻松日（4天）</strong><br>
+        Day2·5·11 — 换乘/休整<br>
+        Day1 — 飞行中
+      </div>
+      <div style="background:#fce4ec;border-radius:8px;padding:10px 12px;border-left:4px solid #e91e63">
+        <strong>必须提前到位的日子</strong><br>
+        Day3 — 05:30出发（日落时间固定）<br>
+        Day4 — 企鹅归巢有固定时间
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

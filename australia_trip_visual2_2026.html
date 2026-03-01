@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行程可视化仪表盘 | 大洋路×塔斯马尼亚 2026五一</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','SimHei',sans-serif;
+  background: #eaf4fb; color: #2c3e50; line-height: 1.5;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
+
+.hero {
+  background: linear-gradient(135deg,#0077b6 0%,#00b4d8 55%,#90e0ef 100%);
+  color: white; padding: 32px 40px; border-radius: 18px;
+  text-align: center; margin-bottom: 22px;
+  box-shadow: 0 8px 32px rgba(0,119,182,.28);
+}
+.hero h1 { font-size: 1.9em; font-weight: 700; margin-bottom: 6px; }
+.hero .subtitle { font-size: .95em; opacity: .9; letter-spacing: 1px; }
+
+.section-box {
+  background: white; border-radius: 16px; padding: 24px;
+  margin-bottom: 22px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+}
+.section-title {
+  font-size: 1.3em; font-weight: 700; margin-bottom: 18px;
+  padding-bottom: 8px; border-bottom: 3px solid #0077b6; color: #0077b6;
+}
+
+/* ─── GANTT ─── */
+.gantt-scroll { overflow-x: auto; padding-bottom: 6px; }
+#gantt { display: block; min-width: 870px; }
+
+.gantt-legend {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  margin-top: 14px; padding: 10px 14px;
+  background: #f8f9fa; border-radius: 8px;
+}
+.gl-item { display: flex; align-items: center; gap: 6px; font-size: .82em; color: #555; }
+.gl-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+/* ─── SCHEDULE CARDS ─── */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.sc-card { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.sc-header {
+  padding: 10px 14px; color: white; font-weight: 700;
+  font-size: .95em; display: flex; justify-content: space-between;
+}
+.sc-warn { font-size: .75em; background: rgba(255,255,255,.25); padding: 2px 7px; border-radius: 10px; }
+
+.sc-body { padding: 12px 12px 12px 52px; position: relative; background: white; }
+.sc-timeline {
+  position: relative;
+  border-left: 2px solid #e8ecf0;
+}
+
+.hour-mark {
+  position: absolute; left: -52px; width: 48px;
+  text-align: right; font-size: 9.5px; color: #bbb;
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.hour-mark::after {
+  content: ''; display: inline-block; width: 6px; height: 1px;
+  background: #e0e0e0; margin-left: 4px;
+}
+.h-line {
+  position: absolute; left: 0; right: 0;
+  border-top: 1px dashed #f0f0f0;
+  pointer-events: none;
+}
+
+.act-block {
+  position: absolute; left: 6px; right: 3px;
+  border-radius: 4px; padding: 2px 6px;
+  font-size: 10px; color: white; font-weight: 600;
+  display: flex; align-items: center;
+  overflow: hidden; white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.warn-line {
+  position: absolute; left: -52px; right: 0;
+  border-top: 2.5px dashed #e74c3c; z-index: 5;
+}
+.warn-tag {
+  position: absolute; right: 0;
+  background: #e74c3c; color: white;
+  font-size: 8.5px; padding: 1px 5px;
+  border-radius: 2px 2px 0 0; transform: translateY(-100%);
+}
+
+/* ─── BUDGET ─── */
+.budget-wrap {
+  display: flex; gap: 36px; align-items: flex-start; flex-wrap: wrap;
+}
+.budget-donut { flex: 0 0 auto; }
+#donut-svg { display: block; }
+.budget-right { flex: 1; min-width: 260px; }
+.budget-total {
+  text-align: center; padding: 14px;
+  background: linear-gradient(135deg,#0077b6,#00b4d8);
+  color: white; border-radius: 10px; margin-bottom: 16px;
+}
+.budget-total .big { font-size: 1.8em; font-weight: 800; }
+.budget-total .lbl { font-size: .82em; opacity: .9; }
+
+.b-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; margin-bottom: 6px;
+  background: #f8f9fa; border-radius: 8px;
+  border-left: 4px solid;
+}
+.b-icon { font-size: 1.3em; flex-shrink: 0; }
+.b-name { flex: 1; font-size: .88em; font-weight: 600; }
+.b-bar-wrap { flex: 1.5; background: #e9ecef; border-radius: 4px; height: 8px; overflow: hidden; }
+.b-bar { height: 100%; border-radius: 4px; }
+.b-amt { font-size: .85em; font-weight: 700; color: #2c3e50; min-width: 68px; text-align: right; }
+.b-pct { font-size: .78em; color: #888; min-width: 30px; text-align: right; }
+
+.tips-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px;
+}
+.tip-card {
+  background: #f0f7ff; border-radius: 8px; padding: 10px 12px;
+  border-left: 3px solid #0077b6; font-size: .83em;
+}
+.tip-card.warn { background: #fff5f5; border-color: #e74c3c; }
+.tip-card strong { display: block; margin-bottom: 3px; font-size: .9em; }
+
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.4em; }
+  .budget-wrap { flex-direction: column; align-items: center; }
+  .tips-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>📊 行程可视化仪表盘</h1>
+  <div class="subtitle">大洋路 × 塔斯马尼亚 &nbsp;|&nbsp; 2026年4月25日–5月5日 &nbsp;|&nbsp; 11天情侣版</div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — GANTT CHART
+══════════════════════════════════════════ -->
+<section class="section-box">
+  <h2 class="section-title">🗂️ 行程强度甘特图 · 11天一览</h2>
+  <div class="gantt-scroll">
+    <svg id="gantt"></svg>
+  </div>
+  <div class="gantt-legend" id="gantt-legend"></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — KEY DAY SCHEDULES
+══════════════════════════════════════════ -->
+<section class="section-box">
+  <h2 class="section-title">⏰ 关键天详细时刻表（D3 · D4 · D9 · D10）</h2>
+  <div class="schedule-grid" id="schedule-grid"></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — BUDGET
+══════════════════════════════════════════ -->
+<section class="section-box">
+  <h2 class="section-title">💰 两人费用预算可视化</h2>
+  <div class="budget-wrap">
+    <div class="budget-donut">
+      <svg id="donut-svg" viewBox="0 0 300 300" width="280" height="280"></svg>
+    </div>
+    <div class="budget-right">
+      <div class="budget-total">
+        <div class="big">¥ 50,000</div>
+        <div class="lbl">两人参考总预算（CNY）</div>
+      </div>
+      <div id="budget-items"></div>
+    </div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <strong>💡 省钱优先级</strong>
+      机票占比最高，提前2-3个月买可省¥3,000-5,000；午餐选超市可省AUD 30-50/天
+    </div>
+    <div class="tip-card">
+      <strong>💡 Parks Pass 值回票价</strong>
+      AUD 50/辆，覆盖摇篮山+酒杯湾+亚瑟港，单次买票两人需 AUD 88+
+    </div>
+    <div class="tip-card warn">
+      <strong>⚠️ 预算弹性最大项</strong>
+      住宿：摇篮山 Peppers Lodge 一晚 AUD 300-500，是最值得的升级但也是最大变量
+    </div>
+    <div class="tip-card warn">
+      <strong>⚠️ 容易超支项</strong>
+      塔州海鲜（生蚝/龙虾）、威士忌伴手礼、直升机（AUD 195/人），建议预留10%弹性预算
+    </div>
+  </div>
+</section>
+
+<footer style="text-align:center;padding:20px 0 10px;color:#aaa;font-size:.82em;">
+  <p>🌊 行程可视化仪表盘 · 澳大利亚大洋路×塔斯马尼亚 2026五一 &nbsp;|&nbsp; 配套路线图：australia_trip_map_2026.html</p>
+</footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+// ─── Color palette ───────────────────────────
+const C = {
+  drive:    '#e67e22',
+  activity: '#3498db',
+  highlight:'#c0392b',
+  meal:     '#27ae60',
+  rest:     '#95a5a6',
+  transit:  '#bdc3c7',
+  flight:   '#8e44ad',
+  optional: '#85c1e9',
+  wait:     '#d5d8dc',
+};
+
+const LEGEND_ITEMS = [
+  { color: C.flight,   label: '✈️ 飞行' },
+  { color: C.drive,    label: '🚗 驾车' },
+  { color: C.highlight,label: '⭐ 核心景点' },
+  { color: C.activity, label: '🔵 活动/景点' },
+  { color: C.meal,     label: '🍽️ 用餐' },
+  { color: C.wait,     label: '⏳ 等待/休整' },
+  { color: C.transit,  label: '🔄 换乘/过渡' },
+  { color: C.optional, label: '💡 可选项目' },
+];
+
+// ─── Gantt Data ───────────────────────────────
+// Each activity: { s: startHour(decimal), e: endHour, t: type, l: label, warn: bool }
+const GANTT = [
+  { label:'D1 4/25', sub:'出发', hdr:'#6c757d', activities:[
+    { s:10, e:23, t:'flight', l:'✈️ 广州→墨尔本 10.5h' }
+  ]},
+  { label:'D2 4/26', sub:'墨尔本', hdr:'#0077b6', activities:[
+    { s:7,  e:10,   t:'transit',  l:'抵达·取车' },
+    { s:10, e:14,   t:'rest',     l:'调整时差' },
+    { s:14, e:17,   t:'activity', l:'联邦广场·咖啡' },
+    { s:17, e:19.5, t:'meal',     l:'晚餐' },
+  ]},
+  { label:'D3 4/27', sub:'大洋路⭐', hdr:'#0096c7', activities:[
+    { s:5.5,  e:7,    t:'drive',     l:'→托尔博 1.5h' },
+    { s:7,    e:7.5,  t:'activity',  l:'托尔博起点' },
+    { s:7.5,  e:9,    t:'drive',     l:'→肯内特河' },
+    { s:9,    e:9.5,  t:'highlight', l:'🐨 野生考拉' },
+    { s:9.5,  e:11,   t:'drive',     l:'→阿波罗湾' },
+    { s:11,   e:12.5, t:'meal',      l:'午餐+加油★' },
+    { s:12.5, e:14,   t:'drive',     l:'→洛克阿德' },
+    { s:14,   e:16,   t:'activity',  l:'洛克阿德峡谷' },
+    { s:16,   e:16.5, t:'drive',     l:'' },
+    { s:16.5, e:18,   t:'highlight', l:'⭐ 十二门徒日落', warn:true },
+    { s:18,   e:18.5, t:'drive',     l:'' },
+    { s:18.5, e:20,   t:'meal',      l:'晚餐·坎贝尔港' },
+  ]},
+  { label:'D4 4/28', sub:'企鹅岛', hdr:'#f77f00', activities:[
+    { s:7,    e:10,   t:'drive',     l:'内陆路返墨尔本 3h' },
+    { s:10,   e:11.5, t:'transit',   l:'墨尔本中转' },
+    { s:11.5, e:13,   t:'drive',     l:'→菲利普岛 1.5h' },
+    { s:13,   e:14,   t:'meal',      l:'午餐' },
+    { s:14,   e:15.5, t:'activity',  l:'🐨 考拉保育中心' },
+    { s:15.5, e:17,   t:'activity',  l:'🦭 诺比斯角' },
+    { s:17,   e:19.5, t:'wait',      l:'等待入夜' },
+    { s:19.5, e:21,   t:'highlight', l:'🐧 企鹅归巢⭐' },
+  ]},
+  { label:'D5 4/29', sub:'飞塔州', hdr:'#6c757d', activities:[
+    { s:9,    e:10.5, t:'drive',    l:'→墨尔本' },
+    { s:10.5, e:14,   t:'transit',  l:'还车·候机' },
+    { s:14,   e:15.5, t:'flight',   l:'✈️ 墨尔本→霍巴特' },
+    { s:15.5, e:18,   t:'transit',  l:'取车·入住' },
+    { s:18,   e:20,   t:'meal',     l:'萨拉曼卡晚餐' },
+  ]},
+  { label:'D6 4/30', sub:'霍巴特', hdr:'#2d6a4f', activities:[
+    { s:9,    e:11,   t:'activity',  l:'萨拉曼卡·老街' },
+    { s:11,   e:13,   t:'activity',  l:'⛰️ 威灵顿山' },
+    { s:13,   e:14,   t:'meal',      l:'午餐' },
+    { s:14,   e:18,   t:'highlight', l:'🎨 MONA 博物馆' },
+    { s:18,   e:19.5, t:'activity',  l:'🥃 威士忌品鉴' },
+    { s:19.5, e:21,   t:'meal',      l:'晚餐' },
+  ]},
+  { label:'D7 5/1', sub:'亚瑟港', hdr:'#1b4332', activities:[
+    { s:9,    e:10.5, t:'drive',     l:'→亚瑟港 1.5h' },
+    { s:10.5, e:15,   t:'highlight', l:'⛓️ 亚瑟港遗址 4.5h' },
+    { s:15,   e:16,   t:'activity',  l:'塔斯曼弓' },
+    { s:16,   e:17.5, t:'drive',     l:'' },
+    { s:17.5, e:19,   t:'meal',      l:'晚餐' },
+    { s:19,   e:20,   t:'drive',     l:'' },
+    { s:20,   e:21.5, t:'highlight', l:'👻 幽灵之旅⭐' },
+    { s:21.5, e:23,   t:'drive',     l:'返霍巴特' },
+  ]},
+  { label:'D8 5/2', sub:'酒杯湾', hdr:'#40916c', activities:[
+    { s:7.5,  e:9,    t:'optional',  l:'💡周六市集(可选)' },
+    { s:9,    e:11.5, t:'drive',     l:'→弗雷西内 2.5h' },
+    { s:11.5, e:12.5, t:'meal',      l:'午餐' },
+    { s:12.5, e:16,   t:'highlight', l:'⭐ 酒杯湾徒步' },
+    { s:16,   e:17.5, t:'activity',  l:'海滩/皮划艇' },
+    { s:17.5, e:18,   t:'transit',   l:'入住' },
+    { s:18,   e:20,   t:'meal',      l:'Freycinet Lodge 晚餐' },
+  ]},
+  { label:'D9 5/3', sub:'⚠️摇篮山', hdr:'#c0392b', activities:[
+    { s:8,    e:10.5, t:'drive',     l:'→朗塞斯顿 2.5h' },
+    { s:10.5, e:12.5, t:'activity',  l:'🍺 啤酒厂+峡谷' },
+    { s:12.5, e:13.5, t:'meal',      l:'午餐' },
+    { s:13.5, e:15.5, t:'drive',     l:'⚠️→摇篮山 2h', warn:true },
+    { s:15.5, e:17,   t:'activity',  l:'袋熊步道' },
+    { s:17,   e:18,   t:'activity',  l:'鸽子湖傍晚' },
+    { s:18,   e:20,   t:'meal',      l:'Peppers晚餐' },
+  ]},
+  { label:'D10 5/4', sub:'⚠️返程', hdr:'#c0392b', activities:[
+    { s:8.5,  e:11,   t:'highlight', l:'⭐ 鸽子湖环线 2.5h' },
+    { s:11,   e:11.5, t:'transit',   l:'收拾出发' },
+    { s:11.5, e:14,   t:'drive',     l:'→霍巴特 2.5h', warn:true },
+    { s:14,   e:16,   t:'transit',   l:'还车·购物' },
+    { s:16,   e:18,   t:'meal',      l:'最后晚餐🦞' },
+    { s:18,   e:20,   t:'rest',      l:'候机' },
+    { s:20,   e:23,   t:'flight',    l:'✈️ 深夜飞深圳' },
+  ]},
+  { label:'D11 5/5', sub:'返深圳', hdr:'#6c757d', activities:[
+    { s:5, e:23, t:'flight', l:'✈️ 经中转抵达深圳（约12-16h飞行）' },
+  ]},
+];
+
+// ─── RENDER GANTT ─────────────────────────────
+(function renderGantt() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.getElementById('gantt');
+  const L = 88, T = 52, HW = 42, RH = 28, RG = 6, S = 5, E = 23;
+  const W = L + (E - S) * HW + 20;
+  const H = T + GANTT.length * (RH + RG) + 28;
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('xmlns', NS);
+
+  function el(tag, attrs, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k,v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  // Background
+  svg.appendChild(el('rect', {x:0,y:0,width:W,height:H,fill:'#f8fafc',rx:10}));
+
+  // Vertical grid lines + time labels
+  for (let h = 6; h <= 22; h += 2) {
+    const x = L + (h - S) * HW;
+    svg.appendChild(el('line', {x1:x,y1:T-6,x2:x,y2:H-14,stroke:'#e8ecf0','stroke-width':1}));
+    svg.appendChild(el('text', {x:x,y:T-10,'text-anchor':'middle','font-size':10,fill:'#aab'},h+':00'));
+  }
+
+  // Header separator
+  svg.appendChild(el('line', {x1:L,y1:T-2,x2:W-10,y2:T-2,stroke:'#d0d7de','stroke-width':1}));
+
+  // Per-day rows
+  GANTT.forEach((day, idx) => {
+    const y = T + idx * (RH + RG);
+
+    // Alternating row bg
+    if (idx % 2 === 0) {
+      svg.appendChild(el('rect',{x:L,y,width:(E-S)*HW,height:RH,fill:'#f0f4f8',rx:2}));
+    }
+
+    // Day label background
+    svg.appendChild(el('rect',{x:0,y,width:L-2,height:RH,fill:day.hdr,rx:4}));
+
+    // Day label text
+    const lb = el('text',{x:L-6,y:y+10,'text-anchor':'end','font-size':10,fill:'white','font-weight':'bold'});
+    lb.textContent = day.label;
+    svg.appendChild(lb);
+    const sub = el('text',{x:L-6,y:y+22,'text-anchor':'end','font-size':9,fill:'rgba(255,255,255,0.85)'});
+    sub.textContent = day.sub;
+    svg.appendChild(sub);
+
+    // Activity blocks
+    day.activities.forEach(act => {
+      const x = L + (act.s - S) * HW;
+      const w = Math.max((act.e - act.s) * HW - 1, 2);
+      const fill = C[act.t] || '#ccc';
+
+      // Special dashed border for optional
+      if (act.t === 'optional') {
+        const r = el('rect',{x,y:y+1,width:w,height:RH-2,fill,rx:4,
+          stroke:'#2980b9','stroke-width':1.5,'stroke-dasharray':'5,3'});
+        svg.appendChild(r);
+      } else {
+        svg.appendChild(el('rect',{x,y:y+1,width:w,height:RH-2,fill,rx:4}));
+      }
+
+      // Warning overlay stripe
+      if (act.warn) {
+        const stripe = el('rect',{x,y:y+1,width:w,height:RH-2,fill:'none',
+          stroke:'#e74c3c','stroke-width':2,rx:4});
+        svg.appendChild(stripe);
+      }
+
+      // Text label
+      if (w > 40 && act.l) {
+        const txt = act.l.length > 14 ? act.l.slice(0,13)+'…' : act.l;
+        svg.appendChild(el('text',{
+          x: x + w/2, y: y + RH/2 + 4,
+          'text-anchor':'middle','font-size':9,fill:'white','font-weight':'bold',
+        }, txt));
+      } else if (w > 18 && act.l) {
+        const ch = act.l.charAt(0);
+        svg.appendChild(el('text',{x:x+w/2,y:y+RH/2+4,'text-anchor':'middle','font-size':9,fill:'white'},ch));
+      }
+    });
+
+    // Warning markers for specific days
+    if (idx === 2) { // D3: sunset deadline
+      const x = L + (16.5 - S) * HW;
+      svg.appendChild(el('line',{x1:x,y1:y-2,x2:x,y2:y+RH+2,stroke:'#e74c3c','stroke-width':2,'stroke-dasharray':'4,3'}));
+      svg.appendChild(el('text',{x,y:y-4,'text-anchor':'middle','font-size':8.5,fill:'#e74c3c'},'⏰16:30'));
+    }
+    if (idx === 8) { // D9: last bus
+      const x = L + (17 - S) * HW;
+      svg.appendChild(el('line',{x1:x,y1:y-2,x2:x,y2:y+RH+2,stroke:'#e74c3c','stroke-width':2,'stroke-dasharray':'4,3'}));
+      svg.appendChild(el('text',{x,y:y-4,'text-anchor':'middle','font-size':8.5,fill:'#e74c3c'},'末班车17:00'));
+    }
+    if (idx === 9) { // D10: must leave Cradle
+      const x = L + (11.5 - S) * HW;
+      svg.appendChild(el('line',{x1:x,y1:y-2,x2:x,y2:y+RH+2,stroke:'#e74c3c','stroke-width':2,'stroke-dasharray':'4,3'}));
+      svg.appendChild(el('text',{x,y:y-4,'text-anchor':'middle','font-size':8.5,fill:'#e74c3c'},'最迟出发'));
+    }
+  });
+
+  // Current time axis line (bottom)
+  svg.appendChild(el('line',{x1:L,y1:H-14,x2:W-10,y2:H-14,stroke:'#d0d7de','stroke-width':1}));
+
+  // Legend
+  const legendEl = document.getElementById('gantt-legend');
+  LEGEND_ITEMS.forEach(li => {
+    const item = document.createElement('div');
+    item.className = 'gl-item';
+    item.innerHTML = `<div class="gl-dot" style="background:${li.color}"></div><span>${li.label}</span>`;
+    legendEl.appendChild(item);
+  });
+})();
+
+// ─── RENDER KEY DAY SCHEDULES ─────────────────
+(function renderSchedules() {
+  const PH = 34; // pixels per hour
+  const START = 5; // 5am
+  const END = 22;  // 10pm
+  const HOURS = END - START;
+
+  const KEY_DAYS = [2, 3, 8, 9]; // indices in GANTT array
+
+  const warnings = {
+    2: [{ hour: 16.5, label: '⏰ 日落截止：必须16:30到达' }],
+    3: [{ hour: 21,   label: '⏰ 约21:00结束，不要当天返墨尔本' }],
+    8: [{ hour: 17,   label: '⏰ 末班穿梭巴士 17:00' }],
+    9: [{ hour: 11.5, label: '⏰ 最迟11:30出发返霍巴特' }],
+  };
+
+  const grid = document.getElementById('schedule-grid');
+
+  KEY_DAYS.forEach(idx => {
+    const day = GANTT[idx];
+    const card = document.createElement('div');
+    card.className = 'sc-card';
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'sc-header';
+    hdr.style.background = day.hdr;
+    hdr.innerHTML = `<span>${day.label} · ${day.sub.replace('⚠️','')}</span>`;
+    if (day.sub.includes('⚠️')) {
+      const w = document.createElement('span');
+      w.className = 'sc-warn';
+      w.textContent = '⚠️ 时间紧凑';
+      hdr.appendChild(w);
+    }
+    card.appendChild(hdr);
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'sc-body';
+    const tl = document.createElement('div');
+    tl.className = 'sc-timeline';
+    tl.style.height = (HOURS * PH) + 'px';
+
+    // Hour marks + horizontal lines
+    for (let h = START; h <= END; h++) {
+      const top = (h - START) * PH;
+      const mark = document.createElement('div');
+      mark.className = 'hour-mark';
+      mark.style.top = top + 'px';
+      mark.textContent = h + ':00';
+      tl.appendChild(mark);
+
+      if (h > START) {
+        const line = document.createElement('div');
+        line.className = 'h-line';
+        line.style.top = top + 'px';
+        tl.appendChild(line);
+      }
+    }
+
+    // Activity blocks
+    day.activities.forEach(act => {
+      const topPx = (act.s - START) * PH;
+      const heightPx = Math.max((act.e - act.s) * PH - 3, 8);
+      const block = document.createElement('div');
+      block.className = 'act-block';
+      block.style.top = topPx + 'px';
+      block.style.height = heightPx + 'px';
+      block.style.background = C[act.t] || '#ccc';
+      if (act.t === 'optional') {
+        block.style.border = '1.5px dashed #2980b9';
+        block.style.background = C.optional;
+      }
+      if (act.warn) {
+        block.style.outline = '2px solid #e74c3c';
+        block.style.outlineOffset = '0px';
+      }
+      if (heightPx > 12) block.textContent = act.l || '';
+      tl.appendChild(block);
+    });
+
+    // Warning lines
+    const dayWarns = warnings[idx] || [];
+    dayWarns.forEach(w => {
+      const top = (w.hour - START) * PH;
+      const wLine = document.createElement('div');
+      wLine.className = 'warn-line';
+      wLine.style.top = top + 'px';
+      const wTag = document.createElement('div');
+      wTag.className = 'warn-tag';
+      wTag.textContent = w.label;
+      wLine.appendChild(wTag);
+      tl.appendChild(wLine);
+    });
+
+    body.appendChild(tl);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+})();
+
+// ─── RENDER BUDGET DONUT + BARS ───────────────
+(function renderBudget() {
+  const BUDGET = [
+    { label:'机票',    amount:17500, pct:35, color:'#8e44ad', icon:'✈️', detail:'深圳↔墨尔本往返+墨尔本→霍巴特' },
+    { label:'住宿',    amount:12000, pct:24, color:'#0077b6', icon:'🏨', detail:'9晚，含摇篮山Peppers Lodge' },
+    { label:'餐饮',    amount: 8000, pct:16, color:'#f77f00', icon:'🍽️', detail:'早中晚+生蚝+威士忌品鉴' },
+    { label:'租车+油', amount: 7000, pct:14, color:'#e67e22', icon:'🚗', detail:'大洋路4天+塔州6天，全险推荐' },
+    { label:'门票活动',amount: 4000, pct: 8, color:'#27ae60', icon:'🎫', detail:'MONA+亚瑟港+企鹅+考拉等' },
+    { label:'购物伴手礼',amount:1500, pct: 3, color:'#78909c', icon:'🛍️', detail:'威士忌+奶酪+蜂蜜等' },
+  ];
+
+  // SVG Donut chart
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.getElementById('donut-svg');
+  const CX = 150, CY = 150, R = 120, r = 72;
+
+  function el(tag, attrs, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k,v] of Object.entries(attrs)) e.setAttribute(k,v);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function polarToCart(cx, cy, radius, angleDeg) {
+    const rad = (angleDeg - 90) * Math.PI / 180;
+    return [cx + radius * Math.cos(rad), cy + radius * Math.sin(rad)];
+  }
+
+  function arcPath(cx, cy, R, r, startAngle, endAngle) {
+    const [x1,y1] = polarToCart(cx,cy,R,startAngle);
+    const [x2,y2] = polarToCart(cx,cy,R,endAngle);
+    const [x3,y3] = polarToCart(cx,cy,r,endAngle);
+    const [x4,y4] = polarToCart(cx,cy,r,startAngle);
+    const large = endAngle - startAngle > 180 ? 1 : 0;
+    return `M${x1},${y1} A${R},${R} 0 ${large},1 ${x2},${y2} L${x3},${y3} A${r},${r} 0 ${large},0 ${x4},${y4} Z`;
+  }
+
+  // Shadow filter
+  const defs = el('defs',{});
+  const flt = el('filter',{id:'ds',x:'-10%',y:'-10%',width:'120%',height:'120%'});
+  const shadow = el('feDropShadow',{dx:'0',dy:'2',stdDeviation:'4','flood-opacity':'0.15'});
+  flt.appendChild(shadow); defs.appendChild(flt); svg.appendChild(defs);
+
+  let startAngle = 0;
+  BUDGET.forEach((item, i) => {
+    const span = item.pct * 360 / 100;
+    const endAngle = startAngle + span;
+    const midAngle = startAngle + span / 2;
+
+    // Segment (slightly exploded for the largest)
+    let offsetX = 0, offsetY = 0;
+    if (i === 0) {
+      const rad = (midAngle - 90) * Math.PI / 180;
+      offsetX = Math.cos(rad) * 5;
+      offsetY = Math.sin(rad) * 5;
+    }
+
+    const path = el('path', {
+      d: arcPath(CX + offsetX, CY + offsetY, R, r, startAngle, endAngle),
+      fill: item.color,
+      stroke: 'white',
+      'stroke-width': 2,
+      filter: 'url(#ds)',
+    });
+    svg.appendChild(path);
+
+    // Label for segments > 8%
+    if (item.pct >= 8) {
+      const lRadius = (R + r) / 2;
+      const [lx, ly] = polarToCart(CX + offsetX, CY + offsetY, lRadius, midAngle);
+      svg.appendChild(el('text',{
+        x: lx, y: ly, 'text-anchor':'middle', 'dominant-baseline':'middle',
+        'font-size': 13, fill:'white', 'font-weight':'bold',
+      }, item.pct + '%'));
+    }
+
+    startAngle = endAngle;
+  });
+
+  // Center label
+  svg.appendChild(el('circle',{cx:CX,cy:CY,r:r-3,fill:'white'}));
+  svg.appendChild(el('text',{x:CX,y:CY-10,'text-anchor':'middle','font-size':13,fill:'#555'},'两人总计'));
+  svg.appendChild(el('text',{x:CX,y:CY+10,'text-anchor':'middle','font-size':18,fill:'#0077b6','font-weight':'bold'},'¥50,000'));
+  svg.appendChild(el('text',{x:CX,y:CY+28,'text-anchor':'middle','font-size':11,fill:'#aaa'},'参考中位值'));
+
+  // Legend + bars
+  const itemsEl = document.getElementById('budget-items');
+  BUDGET.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'b-item';
+    div.style.borderLeftColor = item.color;
+    div.innerHTML = `
+      <span class="b-icon">${item.icon}</span>
+      <span class="b-name">${item.label}</span>
+      <div class="b-bar-wrap">
+        <div class="b-bar" style="width:${item.pct}%;background:${item.color}"></div>
+      </div>
+      <span class="b-amt">¥${item.amount.toLocaleString()}</span>
+      <span class="b-pct">${item.pct}%</span>
+    `;
+    div.title = item.detail;
+    itemsEl.appendChild(div);
+  });
+})();
+</script>
+</body>
+</html>

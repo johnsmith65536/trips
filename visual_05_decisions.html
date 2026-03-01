@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⑤ 关键信息卡片 | 澳大利亚 2026五一</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  background:#f0f4f8; color:#2c3e50; }
+.header { background:linear-gradient(135deg,#c62828,#e53935 40%,#ef9a9a);
+  color:white; padding:28px 24px 22px; text-align:center; }
+.header h1 { font-size:1.7em; margin-bottom:6px; }
+.header p { font-size:.88em; opacity:.88; }
+.container { max-width:1100px; margin:0 auto; padding:20px 14px 36px; }
+
+/* Section */
+.sec-title { font-size:1em; font-weight:700; color:#555;
+  letter-spacing:.5px; margin:20px 0 12px;
+  display:flex; align-items:center; gap:8px; }
+.sec-title::after { content:''; flex:1; height:1px; background:#ddd; }
+
+/* Booking cards */
+.booking-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:12px; margin-bottom:4px; }
+.book-card { background:white; border-radius:12px; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.09); }
+.book-header { padding:10px 14px; color:white; display:flex;
+  justify-content:space-between; align-items:center; }
+.book-title { font-size:.95em; font-weight:700; }
+.book-when { font-size:.75em; background:rgba(255,255,255,.25);
+  padding:2px 8px; border-radius:10px; }
+.book-body { padding:10px 14px 12px; font-size:.82em; }
+.book-row { display:flex; justify-content:space-between; align-items:flex-start;
+  padding:4px 0; border-bottom:1px solid #f5f5f5; }
+.book-row:last-child { border-bottom:none; }
+.book-key { color:#777; min-width:64px; flex-shrink:0; }
+.book-val { color:#333; text-align:right; }
+.urgency { display:inline-block; font-size:.72em; padding:2px 7px;
+  border-radius:8px; font-weight:600; margin-top:6px; }
+.u-now { background:#ffebee; color:#c62828; }
+.u-soon { background:#fff3e0; color:#e65100; }
+.u-ok { background:#e8f5e9; color:#2e7d32; }
+
+/* Weather table */
+.weather-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px; margin-bottom:4px; }
+.weather-card { background:white; border-radius:12px; padding:14px 16px;
+  box-shadow:0 2px 10px rgba(0,0,0,.09); border-top:4px solid; }
+.w-location { font-size:.95em; font-weight:700; margin-bottom:8px; }
+.w-row { display:flex; justify-content:space-between; font-size:.82em;
+  padding:3px 0; border-bottom:1px solid #f5f5f5; }
+.w-row:last-child { border-bottom:none; }
+.w-key { color:#777; }
+.w-val { font-weight:600; }
+
+/* Risk cards */
+.risk-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:12px; }
+.risk-card { border-radius:12px; padding:14px 16px; border-left:5px solid; }
+.risk-title { font-size:.92em; font-weight:700; margin-bottom:6px;
+  display:flex; align-items:center; gap:6px; }
+.risk-desc { font-size:.81em; color:#555; line-height:1.55; }
+.risk-action { font-size:.79em; font-weight:600; margin-top:7px;
+  padding:5px 8px; background:white; border-radius:6px; }
+
+/* Checklist */
+.checklist { list-style:none; }
+.checklist li { display:flex; align-items:flex-start; gap:8px;
+  padding:7px 0; border-bottom:1px solid #f0f0f0; font-size:.83em; }
+.checklist li:last-child { border-bottom:none; }
+.check-box { width:18px; height:18px; border-radius:4px; border:2px solid #ccc;
+  flex-shrink:0; margin-top:1px; }
+.check-text { flex:1; color:#444; line-height:1.45; }
+.check-tag { font-size:.72em; padding:1px 7px; border-radius:8px;
+  margin-left:4px; font-weight:600; }
+
+/* Contact table */
+table { width:100%; border-collapse:collapse; font-size:.83em; }
+th { background:#e3f2fd; color:#1565c0; padding:8px 12px; text-align:left; font-weight:600; }
+td { padding:7px 12px; border-top:1px solid #f0f4f8; color:#444; }
+.sec-box { background:white; border-radius:14px; padding:18px 20px;
+  box-shadow:0 2px 12px rgba(0,0,0,.09); margin-bottom:4px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🔑 关键信息卡片</h1>
+  <p>必须提前预订 · 天气穿衣 · 风险预警 · 证件清单 · 紧急联系</p>
+</div>
+
+<div class="container">
+
+  <!-- ① 预订 -->
+  <div class="sec-title">① 必须提前预订的事项（按紧迫程度排序）</div>
+  <div class="booking-grid">
+
+    <div class="book-card">
+      <div class="book-header" style="background:#c62828">
+        <div class="book-title">🏨 Peppers Cradle Mountain Lodge</div>
+        <div class="book-when">现在就订！</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">入住日期</div><div class="book-val">5月3日（Day9）</div></div>
+        <div class="book-row"><div class="book-key">位置</div><div class="book-val">摇篮山园区内唯一酒店</div></div>
+        <div class="book-row"><div class="book-key">特色</div><div class="book-val">壁炉木屋+露天热水浴缸</div></div>
+        <div class="book-row"><div class="book-key">参考价格</div><div class="book-val">AUD 300–500/晚（含早）</div></div>
+        <div class="book-row"><div class="book-key">预订网站</div><div class="book-val">peppershotels.com.au</div></div>
+        <span class="urgency u-now">🔥 极度抢手，提前2-3月订</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#c62828">
+        <div class="book-title">✈️ 深圳→墨尔本机票</div>
+        <div class="book-when">2月底前购</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">出发</div><div class="book-val">4月25日（ANZAC Day）</div></div>
+        <div class="book-row"><div class="book-key">推荐</div><div class="book-val">南方航空广州直飞（10.5h）</div></div>
+        <div class="book-row"><div class="book-key">参考价格</div><div class="book-val">¥3500–5500/人（往返）</div></div>
+        <div class="book-row"><div class="book-key">注意</div><div class="book-val">4月25日是ANZAC Day假日</div></div>
+        <span class="urgency u-now">🔥 五一前2个月价格最佳</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#e65100">
+        <div class="book-title">✈️ 墨尔本→霍巴特机票</div>
+        <div class="book-when">尽快购买</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">出发</div><div class="book-val">4月29日下午（Day5）</div></div>
+        <div class="book-row"><div class="book-key">航空公司</div><div class="book-val">Jetstar / Qantas</div></div>
+        <div class="book-row"><div class="book-key">飞行时长</div><div class="book-val">约1小时10分</div></div>
+        <div class="book-row"><div class="book-key">注意</div><div class="book-val">Jetstar部分班次从Avalon出发！</div></div>
+        <div class="book-row"><div class="book-key">参考价格</div><div class="book-val">AUD 50–150/人（提前购）</div></div>
+        <span class="urgency u-soon">⚡ 确认从MEL出发，非Avalon</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#e65100">
+        <div class="book-title">🏨 Freycinet Lodge</div>
+        <div class="book-when">提前2月订</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">入住日期</div><div class="book-val">5月2日（Day8）</div></div>
+        <div class="book-row"><div class="book-key">位置</div><div class="book-val">弗雷西内国家公园内</div></div>
+        <div class="book-row"><div class="book-key">特色</div><div class="book-val">独立木屋，带木质浴缸</div></div>
+        <div class="book-row"><div class="book-key">参考价格</div><div class="book-val">AUD 250–400/晚</div></div>
+        <div class="book-row"><div class="book-key">预订</div><div class="book-val">freycinetlodge.com.au</div></div>
+        <span class="urgency u-soon">⚡ 园内住宿名额有限</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#7b1fa2">
+        <div class="book-title">🐧 企鹅归巢门票</div>
+        <div class="book-when">建议提前买</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">日期</div><div class="book-val">4月28日夜（Day4）</div></div>
+        <div class="book-row"><div class="book-key">时间</div><div class="book-val">约19:30（日落后）</div></div>
+        <div class="book-row"><div class="book-key">价格</div><div class="book-val">AUD 30–35/人（标准票）</div></div>
+        <div class="book-row"><div class="book-key">升级选项</div><div class="book-val">地下视角台 AUD 40–60/人</div></div>
+        <div class="book-row"><div class="book-key">预订网站</div><div class="book-val">penguins.org.au</div></div>
+        <span class="urgency u-ok">✓ 5月淡季，但建议提前</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#7b1fa2">
+        <div class="book-title">🚁 十二门徒直升机</div>
+        <div class="book-when">可现场订</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">日期</div><div class="book-val">4月27日下午（Day3）</div></div>
+        <div class="book-row"><div class="book-key">路线</div><div class="book-val">16分钟 AUD 195/人</div></div>
+        <div class="book-row"><div class="book-key">也可选</div><div class="book-val">25分钟 AUD 295/人</div></div>
+        <div class="book-row"><div class="book-key">注意</div><div class="book-val">大风天气可能取消！</div></div>
+        <div class="book-row"><div class="book-key">预订</div><div class="book-val">12apostleshelicopters.com.au</div></div>
+        <span class="urgency u-ok">✓ 天气好才能飞，灵活预约</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#37474f">
+        <div class="book-title">👻 亚瑟港幽灵之旅</div>
+        <div class="book-when">需提前预约</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">日期</div><div class="book-val">5月1日夜（Day7）</div></div>
+        <div class="book-row"><div class="book-key">时间</div><div class="book-val">亚瑟港关闭后夜间</div></div>
+        <div class="book-row"><div class="book-key">价格</div><div class="book-val">AUD 30/人</div></div>
+        <div class="book-row"><div class="book-key">体验</div><div class="book-val">灯笼导游，废墟夜游</div></div>
+        <div class="book-row"><div class="book-key">预订</div><div class="book-val">portarthur.org.au</div></div>
+        <span class="urgency u-ok">✓ 情侣必选，气氛极好</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-header" style="background:#0077b6">
+        <div class="book-title">🛂 澳大利亚ETA签证</div>
+        <div class="book-when">出发前3月申请</div>
+      </div>
+      <div class="book-body">
+        <div class="book-row"><div class="book-key">申请方式</div><div class="book-val">"Australia ETA" 官方App</div></div>
+        <div class="book-row"><div class="book-key">费用</div><div class="book-val">AUD 20/人</div></div>
+        <div class="book-row"><div class="book-key">批复时间</div><div class="book-val">通常1-3个工作日</div></div>
+        <div class="book-row"><div class="book-key">有效期</div><div class="book-val">1年，每次可停3个月</div></div>
+        <span class="urgency u-now">🔥 出发前务必申请，勿最后一刻</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ② 天气穿衣 -->
+  <div class="sec-title">② 5月天气与穿衣参考</div>
+  <div class="weather-grid">
+    <div class="weather-card" style="border-color:#0077b6">
+      <div class="w-location">🏙 墨尔本 / 大洋路</div>
+      <div class="w-row"><div class="w-key">白天</div><div class="w-val">12–17°C</div></div>
+      <div class="w-row"><div class="w-key">夜间</div><div class="w-val">7–10°C</div></div>
+      <div class="w-row"><div class="w-key">天气特点</div><div class="w-val">多阴雨，沿海大风</div></div>
+      <div class="w-row"><div class="w-key">必带</div><div class="w-val">防风防水冲锋衣</div></div>
+      <div class="w-row"><div class="w-key">推荐穿法</div><div class="w-val">内衣+毛衣+冲锋衣</div></div>
+    </div>
+    <div class="weather-card" style="border-color:#0097a7">
+      <div class="w-location">🏛 霍巴特（塔斯马尼亚）</div>
+      <div class="w-row"><div class="w-key">白天</div><div class="w-val">10–14°C</div></div>
+      <div class="w-row"><div class="w-key">夜间</div><div class="w-val">4–8°C</div></div>
+      <div class="w-row"><div class="w-key">天气特点</div><div class="w-val">多变，同日四季</div></div>
+      <div class="w-row"><div class="w-key">必带</div><div class="w-val">冲锋衣+保暖内衣</div></div>
+      <div class="w-row"><div class="w-key">推荐穿法</div><div class="w-val">内衣+抓绒+冲锋衣</div></div>
+    </div>
+    <div class="weather-card" style="border-color:#1b5e20">
+      <div class="w-location">⛰️ 摇篮山（高海拔）</div>
+      <div class="w-row"><div class="w-key">白天</div><div class="w-val" style="color:#c62828">5–10°C</div></div>
+      <div class="w-row"><div class="w-key">夜间</div><div class="w-val" style="color:#c62828">0–3°C ❄️</div></div>
+      <div class="w-row"><div class="w-key">天气特点</div><div class="w-val">可能有霜冻/积雪</div></div>
+      <div class="w-row"><div class="w-key">必带</div><div class="w-val" style="color:#c62828">羽绒服+保暖手套+毛帽</div></div>
+      <div class="w-row"><div class="w-key">末班车</div><div class="w-val" style="color:#c62828">17:00 必须回来！</div></div>
+    </div>
+    <div class="weather-card" style="border-color:#f57c00">
+      <div class="w-location">☀️ 通用（全程注意）</div>
+      <div class="w-row"><div class="w-key">防晒</div><div class="w-val">SPF 50+（阴天也要抹）</div></div>
+      <div class="w-row"><div class="w-key">雨具</div><div class="w-val">折叠伞或雨披</div></div>
+      <div class="w-row"><div class="w-key">徒步鞋</div><div class="w-val">防滑+防水，走石路</div></div>
+      <div class="w-row"><div class="w-key">极光观测</div><div class="w-val">Space Weather Australia App</div></div>
+      <div class="w-row"><div class="w-key">天气预报</div><div class="w-val">bom.gov.au（官方最准）</div></div>
+    </div>
+  </div>
+
+  <!-- ③ 风险预警 -->
+  <div class="sec-title">③ 风险预警 & 避坑指南</div>
+  <div class="risk-grid">
+
+    <div class="risk-card" style="background:#fff8e1;border-color:#f57c00">
+      <div class="risk-title">⛽ 大洋路油量警戒</div>
+      <div class="risk-desc">阿波罗湾到坎贝尔港这段加油站极度稀少，
+        油表到1/4就必须找油站加油，绝对不可赌"再开一段"。
+        很多中国游客在这段因为油料不足而被拖救。</div>
+      <div class="risk-action" style="color:#f57c00">✅ 行动：在阿波罗湾无论如何加满油，那是最后可靠的加油点</div>
+    </div>
+
+    <div class="risk-card" style="background:#fce4ec;border-color:#c62828">
+      <div class="risk-title">🦘 黄昏路上的袋鼠</div>
+      <div class="risk-desc">黄昏和夜间是袋鼠最活跃时段，会突然从草丛冲上公路。
+        撞上袋鼠不仅伤动物，车辆损毁严重，租车标准险通常不赔。
+        塔斯马尼亚乡村公路尤为危险。</div>
+      <div class="risk-action" style="color:#c62828">✅ 行动：天黑后停止在塔州乡村路高速行驶；购买全险（+AUD20–30/天）</div>
+    </div>
+
+    <div class="risk-card" style="background:#e8f5e9;border-color:#2e7d32">
+      <div class="risk-title">🚗 左行右舵不适应</div>
+      <div class="risk-desc">澳洲靠左行驶，方向盘在右边，转向灯和雨刷位置互换。
+        第一天从停车场开出去最容易走错方向，
+        雨刷/转向灯也会第一天必定搞混。</div>
+      <div class="risk-action" style="color:#2e7d32">✅ 行动：副驾全程喊"靠左靠左"；停车场多练几分钟再上路</div>
+    </div>
+
+    <div class="risk-card" style="background:#e3f2fd;border-color:#1565c0">
+      <div class="risk-title">📱 塔州信号盲区</div>
+      <div class="risk-desc">弗雷西内、摇篮山等大部分区域完全无手机信号，
+        事故后很难求救。导航依赖手机会在关键时刻失效，
+        尤其是迷路在山中的情况。</div>
+      <div class="risk-action" style="color:#1565c0">✅ 行动：出发前在酒店下载Google Maps离线地图；告知住宿方当天目的地</div>
+    </div>
+
+    <div class="risk-card" style="background:#f3e5f5;border-color:#7b1fa2">
+      <div class="risk-title">🎨 MONA 周二闭馆</div>
+      <div class="risk-desc">MONA每周二闭馆，这是最高频的踩坑。
+        2026年4月30日（Day6）是周四，OK。
+        但如果行程有临时调整，务必检查星期几。</div>
+      <div class="risk-action" style="color:#7b1fa2">✅ 行动：Day6（4/30周四）去MONA，注意勿调整到周二</div>
+    </div>
+
+    <div class="risk-card" style="background:#fff3e0;border-color:#e65100">
+      <div class="risk-title">⚡ 超速摄像头极严</div>
+      <div class="risk-desc">澳洲速度摄像头遍布各地，超速3km/h即可被罚，
+        起步AUD 200+。进镇前限速从100降到60，
+        这个骤降区段是最高频被拍区域。</div>
+      <div class="risk-action" style="color:#e65100">✅ 行动：导航全程显示限速；经过小镇路段提前减速到60</div>
+    </div>
+
+    <div class="risk-card" style="background:#e0f7fa;border-color:#0097a7">
+      <div class="risk-title">🕐 摇篮山末班接驳车</div>
+      <div class="risk-desc">5月淡季末班接驳巴士约17:00，错过后需徒步5km以上
+        才能回到停车场，而山上气温接近0°C，
+        黑夜中的山路极度危险。</div>
+      <div class="risk-action" style="color:#0097a7">✅ 行动：设置手机闹钟16:00提醒返程；下山留足时间</div>
+    </div>
+
+    <div class="risk-card" style="background:#fce4ec;border-color:#ad1457">
+      <div class="risk-title">🍎 入境塔州食物检疫</div>
+      <div class="risk-desc">登岛时不得携带任何生鲜食品（水果、蛋类、肉类、
+        植物、种子），违规罚款AUD 420–2,664。
+        塔斯马尼亚对生物入侵管控极严。</div>
+      <div class="risk-action" style="color:#ad1457">✅ 行动：飞机上或抵达霍巴特后，吃完或丢掉所有水果、食物</div>
+    </div>
+
+    <div class="risk-card" style="background:#e8f5e9;border-color:#2e7d32">
+      <div class="risk-title">🏠 墨尔本高速收费</div>
+      <div class="risk-desc">CityLink/EastLink高速无人工收费亭，
+        租车公司代缴会收AUD 5–10手续费/次。
+        机场到市区的CityLink是最常踩的坑。</div>
+      <div class="risk-action" style="color:#2e7d32">✅ 行动：到7-Eleven买e-TAG临时通行证（AUD 5/天，无限次）</div>
+    </div>
+
+    <div class="risk-card" style="background:#fff8e1;border-color:#f57c00">
+      <div class="risk-title">🗓️ ANZAC Day（4月25日）</div>
+      <div class="risk-desc">出发日恰逢澳大利亚全国法定假日，
+        超市/部分商店早上关闭，道路可能有纪念游行。
+        第一天到达后务必保持行程简单。</div>
+      <div class="risk-action" style="color:#f57c00">✅ 行动：到达墨尔本后直接休息，不安排密集购物，次日再出发</div>
+    </div>
+
+  </div>
+
+  <!-- ④ 证件清单 -->
+  <div class="sec-title">④ 出行证件清单</div>
+  <div class="sec-box">
+    <ul class="checklist">
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text"><strong>护照</strong>——有效期须超过回程日期6个月以上
+          <span class="check-tag" style="background:#ffebee;color:#c62828">必须</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text"><strong>澳大利亚ETA电子签证</strong>——手机截图备份
+          <span class="check-tag" style="background:#ffebee;color:#c62828">必须</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text"><strong>中国驾照原件</strong>（不能是复印件）
+          <span class="check-tag" style="background:#ffebee;color:#c62828">必须</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text"><strong>国际驾照（IDP）</strong>——当地交管局办理，约¥50，3个工作日
+          <span class="check-tag" style="background:#ffebee;color:#c62828">必须（驾照缺一不可）</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text"><strong>信用卡</strong>（VISA/MasterCard，建议2张不同银行）
+          <span class="check-tag" style="background:#fff8e1;color:#e65100">强烈建议</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text"><strong>旅行保险凭证</strong>（含医疗+取消保障，约¥400–800/人）
+          <span class="check-tag" style="background:#fff8e1;color:#e65100">强烈建议</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text">少量澳元现金（部分小镇/农庄不接受刷卡）
+          <span class="check-tag" style="background:#e8f5e9;color:#2e7d32">建议带</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-text">澳洲转换插头（三孔斜插，Type I）
+          <span class="check-tag" style="background:#e8f5e9;color:#2e7d32">必带电器</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ⑤ 紧急联系 -->
+  <div class="sec-title">⑤ 紧急联系 & 重要网站</div>
+  <div class="sec-box">
+    <table>
+      <thead>
+        <tr><th>用途</th><th>联系方式 / 网址</th><th>备注</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🚨 澳洲急救/报警/火警</td><td><strong>000</strong></td><td>全国通用，24h</td></tr>
+        <tr><td>🏛 中国驻墨尔本总领馆</td><td><strong>+61-3-9824-8810</strong></td><td>领事保护热线</td></tr>
+        <tr><td>🏛 中国驻澳大利亚大使馆</td><td>+61-2-6273-4780</td><td>坎培拉（备用）</td></tr>
+        <tr><td>🌤️ 澳洲官方天气</td><td>bom.gov.au</td><td>最准确</td></tr>
+        <tr><td>🌌 极光预警</td><td>Aurora Service Australia App</td><td>Kp≥4有机会</td></tr>
+        <tr><td>🎫 塔州国家公园</td><td>parks.tas.gov.au</td><td>购通票、看路况</td></tr>
+        <tr><td>🐧 企鹅归巢预约</td><td>penguins.org.au</td><td>4月28日（Day4）</td></tr>
+        <tr><td>⛓️ 亚瑟港幽灵之旅</td><td>portarthur.org.au</td><td>5月1日（Day7）</td></tr>
+        <tr><td>🚁 十二门徒直升机</td><td>12apostleshelicopters.com.au</td><td>4月27日（Day3）</td></tr>
+        <tr><td>📱 离线地图下载</td><td>Google Maps → 下载离线区域</td><td>出发前在酒店WiFi下载</td></tr>
+        <tr><td>🚗 墨尔本高速通行</td><td>citylink.com.au</td><td>或7-Eleven买e-TAG</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 最终行前检查 -->
+  <div style="background:linear-gradient(135deg,#c62828,#e53935);border-radius:14px;padding:18px 20px;color:white;margin-top:8px">
+    <h3 style="margin-bottom:12px;font-size:1em">🔥 出发前最终检查（D-7）</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;font-size:.82em">
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 护照有效期6个月以上确认
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ ETA签证已批准，截图备份
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 国际驾照（IDP）已办理
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ Peppers Lodge已预订确认
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 企鹅归巢门票已购
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ Freycinet Lodge已预订
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ MEL→HBA机票已购（确认从MEL出发）
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 离线地图已下载（塔斯马尼亚）
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 旅行保险已购，凭证已存手机
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 澳洲转换插头已打包
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 幽灵之旅已预约（portarthur.org.au）
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px 12px">
+        □ 租车（维多利亚+塔州）两段均已预订
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

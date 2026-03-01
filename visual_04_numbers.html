@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>④ 数字摘要 | 澳大利亚 2026五一</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  background:#f0f4f8; color:#2c3e50; }
+.header { background:linear-gradient(135deg,#0077b6,#00b4d8 55%,#48cae4);
+  color:white; padding:28px 24px 22px; text-align:center; }
+.header h1 { font-size:1.7em; margin-bottom:6px; }
+.header p { font-size:.88em; opacity:.85; }
+.container { max-width:1100px; margin:0 auto; padding:20px 14px 36px; }
+
+/* Big stat cards */
+.big-stats { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:12px; margin-bottom:22px; }
+.big-card { background:white; border-radius:14px; padding:16px 12px;
+  text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.09);
+  border-top:5px solid; }
+.big-card .icon { font-size:2.2em; margin-bottom:6px; }
+.big-card .num { font-size:1.9em; font-weight:800; line-height:1; margin-bottom:4px; }
+.big-card .label { font-size:.75em; color:#777; }
+
+/* Section */
+.sec { background:white; border-radius:14px; padding:18px 20px;
+  box-shadow:0 2px 12px rgba(0,0,0,.09); margin-bottom:18px; }
+.sec h3 { font-size:1em; color:#0077b6; margin-bottom:16px;
+  padding-bottom:8px; border-bottom:2px solid #e3f2fd; }
+
+/* Budget bar chart */
+.budget-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:.84em; }
+.budget-label { width:110px; flex-shrink:0; color:#555; text-align:right; }
+.budget-bar-wrap { flex:1; background:#f0f4f8; border-radius:6px; height:22px; overflow:hidden; }
+.budget-bar { height:100%; border-radius:6px; display:flex; align-items:center;
+  padding:0 8px; color:white; font-size:.75em; font-weight:600; white-space:nowrap;
+  overflow:hidden; transition:width .6s; }
+.budget-value { width:90px; flex-shrink:0; font-size:.82em; color:#444; text-align:right; }
+
+/* Distance breakdown */
+.dist-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:10px; }
+.dist-card { background:#f8fafb; border-radius:10px; padding:12px 14px;
+  border-left:4px solid; }
+.dist-card .d-route { font-size:.82em; color:#555; margin-bottom:4px; }
+.dist-card .d-nums { font-size:.9em; font-weight:700; color:#2c3e50; }
+
+/* Time allocation */
+.time-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.time-row { display:flex; justify-content:space-between; align-items:center;
+  padding:8px 0; border-bottom:1px solid #f0f0f0; font-size:.84em; }
+.time-row:last-child { border-bottom:none; }
+.time-label { color:#555; }
+.time-val { font-weight:700; color:#0077b6; }
+
+/* Day breakdown table */
+table { width:100%; border-collapse:collapse; font-size:.83em; }
+th { background:#e3f2fd; color:#1565c0; padding:9px 12px; text-align:left; font-weight:600; }
+td { padding:8px 12px; border-top:1px solid #f0f4f8; color:#444; }
+tr:last-child td { background:#f8f9ff; font-weight:700; color:#0077b6; }
+
+/* Donut chart section */
+.donut-row { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+.donut-legend { display:flex; flex-direction:column; gap:8px; }
+.leg-row { display:flex; align-items:center; gap:8px; font-size:.82em; color:#555; }
+.leg-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
+
+/* Per-person highlight */
+.highlight-box { background:linear-gradient(135deg,#e3f2fd,#e8f5e9);
+  border-radius:12px; padding:16px 20px; margin-bottom:18px;
+  display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+.hl-item { text-align:center; }
+.hl-num { font-size:2em; font-weight:800; color:#0077b6; line-height:1; }
+.hl-label { font-size:.75em; color:#666; margin-top:3px; }
+.hl-divider { width:1px; height:50px; background:#ccc; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 行程数字摘要</h1>
+  <p>用数字直观理解这趟旅行的体量 | 两人 · 11天 · 澳大利亚</p>
+</div>
+
+<div class="container">
+
+  <!-- Big stats -->
+  <div class="big-stats">
+    <div class="big-card" style="border-color:#0077b6">
+      <div class="icon">📅</div>
+      <div class="num" style="color:#0077b6">11</div>
+      <div class="label">天（4.25–5.5）</div>
+    </div>
+    <div class="big-card" style="border-color:#e65100">
+      <div class="icon">🚗</div>
+      <div class="num" style="color:#e65100">1,636</div>
+      <div class="label">公里 总驾驶里程</div>
+    </div>
+    <div class="big-card" style="border-color:#7b1fa2">
+      <div class="icon">✈️</div>
+      <div class="num" style="color:#7b1fa2">4</div>
+      <div class="label">段航班（含中转）</div>
+    </div>
+    <div class="big-card" style="border-color:#2e7d32">
+      <div class="icon">🏨</div>
+      <div class="num" style="color:#2e7d32">9</div>
+      <div class="label">晚住宿（5城市）</div>
+    </div>
+    <div class="big-card" style="border-color:#c62828">
+      <div class="icon">💰</div>
+      <div class="num" style="color:#c62828">5万</div>
+      <div class="label">人民币（两人）</div>
+    </div>
+    <div class="big-card" style="border-color:#00695c">
+      <div class="icon">⭐</div>
+      <div class="num" style="color:#00695c">16</div>
+      <div class="label">核心景点</div>
+    </div>
+    <div class="big-card" style="border-color:#f57c00">
+      <div class="icon">🐾</div>
+      <div class="num" style="color:#f57c00">5+</div>
+      <div class="label">野生动物种类</div>
+    </div>
+    <div class="big-card" style="border-color:#37474f">
+      <div class="icon">🥂</div>
+      <div class="num" style="color:#37474f">2</div>
+      <div class="label">人（情侣出行）</div>
+    </div>
+  </div>
+
+  <!-- Per-person highlight -->
+  <div class="highlight-box">
+    <div class="hl-item">
+      <div class="hl-num">¥25,000</div>
+      <div class="hl-label">每人花费（中值）</div>
+    </div>
+    <div class="hl-divider"></div>
+    <div class="hl-item">
+      <div class="hl-num">¥2,273</div>
+      <div class="hl-label">每天人均花费</div>
+    </div>
+    <div class="hl-divider"></div>
+    <div class="hl-item">
+      <div class="hl-num">AUD 1.00</div>
+      <div class="hl-label">≈ CNY 4.6</div>
+    </div>
+    <div class="hl-divider"></div>
+    <div class="hl-item">
+      <div class="hl-num">+2h</div>
+      <div class="hl-label">澳洲比深圳早2小时</div>
+    </div>
+    <div class="hl-divider"></div>
+    <div class="hl-item">
+      <div class="hl-num">40%+</div>
+      <div class="hl-label">塔州受保护土地比例</div>
+    </div>
+    <div class="hl-divider"></div>
+    <div class="hl-item">
+      <div class="hl-num">5月</div>
+      <div class="hl-label">淡季，住宿省20–40%</div>
+    </div>
+  </div>
+
+  <!-- Budget breakdown -->
+  <div class="sec">
+    <h3>💰 两人总费用分项拆解（参考值，单位：人民币）</h3>
+    <div style="margin-bottom:16px">
+      <div class="budget-row">
+        <div class="budget-label">✈️ 机票</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#c62828;width:38%">深圳↔墨尔本+MEL→HBA</div>
+        </div>
+        <div class="budget-value">¥14,000–23,000</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🏨 住宿</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#0077b6;width:26%">9晚（含特色住宿）</div>
+        </div>
+        <div class="budget-value">¥10,000–13,000</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🍽️ 餐饮</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#e65100;width:21%">全程10天</div>
+        </div>
+        <div class="budget-value">¥7,400–10,600</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🚗 租车</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#7b1fa2;width:12%">两段共10天</div>
+        </div>
+        <div class="budget-value">¥4,600–6,900</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🎫 景点门票</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#2e7d32;width:8%">通票+MONA等</div>
+        </div>
+        <div class="budget-value">¥2,800–3,700</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🛍️ 购物伴手礼</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#00695c;width:5%">威士忌等</div>
+        </div>
+        <div class="budget-value">¥1,400–2,300</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🛢️ 油费+停车</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#f57c00;width:4%"></div>
+        </div>
+        <div class="budget-value">¥1,150–1,840</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🛡️ 签证+保险</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar" style="background:#546e7a;width:3%"></div>
+        </div>
+        <div class="budget-value">¥1,200</div>
+      </div>
+    </div>
+    <div style="background:#fff3e0;border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <span style="font-size:.88em;color:#e65100">💡 主要弹性在机票（直飞vs中转）和住宿（是否升级Peppers Lodge）</span>
+      <span style="font-size:1.1em;font-weight:800;color:#c62828">合计 ¥42,000–62,000</span>
+    </div>
+  </div>
+
+  <!-- Time allocation + Driving breakdown -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+    <div class="sec" style="margin-bottom:0">
+      <h3>🕐 11天时间分配</h3>
+      <div class="time-row"><div class="time-label">✈️ 飞行时间（机上）</div><div class="time-val">~28 h</div></div>
+      <div class="time-row"><div class="time-label">🚗 自驾时间（驾驶）</div><div class="time-val">~24 h</div></div>
+      <div class="time-row"><div class="time-label">🌊 游览景点</div><div class="time-val">~60 h</div></div>
+      <div class="time-row"><div class="time-label">🏨 酒店住宿</div><div class="time-val">~90 h</div></div>
+      <div class="time-row"><div class="time-label">🍽️ 餐饮（含找餐厅）</div><div class="time-val">~22 h</div></div>
+      <div class="time-row"><div class="time-label">📦 行程总时长</div><div class="time-val">11天 = 264 h</div></div>
+    </div>
+
+    <div class="sec" style="margin-bottom:0">
+      <h3>🌡️ 5月各地气温速查</h3>
+      <div class="time-row">
+        <div class="time-label">墨尔本 / 大洋路</div>
+        <div style="font-size:.84em;color:#555">12–17°C | 夜间7–10°C</div>
+      </div>
+      <div class="time-row">
+        <div class="time-label">霍巴特（塔州）</div>
+        <div style="font-size:.84em;color:#555">10–14°C | 夜间4–8°C</div>
+      </div>
+      <div class="time-row">
+        <div class="time-label">摇篮山</div>
+        <div style="font-size:.84em;color:#e65100;font-weight:600">5–10°C | 夜间0–3°C ❄️</div>
+      </div>
+      <div class="time-row">
+        <div class="time-label">日落时间（5月）</div>
+        <div style="font-size:.84em;color:#555">约17:15</div>
+      </div>
+      <div class="time-row">
+        <div class="time-label">企鹅归巢时间</div>
+        <div style="font-size:.84em;color:#555">约19:30–20:00</div>
+      </div>
+      <div class="time-row">
+        <div class="time-label">摇篮山末班接驳</div>
+        <div style="font-size:.84em;color:#e65100;font-weight:600">17:00 ⚠️ 不能错过！</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Driving detail table -->
+  <div class="sec">
+    <h3>🚗 驾驶里程详细分拆</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      <div>
+        <div style="font-size:.84em;font-weight:700;color:#e65100;margin-bottom:8px">维多利亚段（Day2–5）</div>
+        <div class="dist-card" style="border-color:#e65100;margin-bottom:6px">
+          <div class="d-route">Day3 墨尔本→大洋路→坎贝尔港</div>
+          <div class="d-nums">340 km · ~6h行驶</div>
+        </div>
+        <div class="dist-card" style="border-color:#f57c00;margin-bottom:6px">
+          <div class="d-route">Day4 坎贝尔港→内陆路→菲利普岛</div>
+          <div class="d-nums">290 km · ~4.5h行驶</div>
+        </div>
+        <div class="dist-card" style="border-color:#ff9800">
+          <div class="d-route">Day5 菲利普岛→墨尔本（还车）</div>
+          <div class="d-nums">140 km · ~1.5h行驶</div>
+        </div>
+        <div style="margin-top:8px;padding:8px 10px;background:#fff8e1;border-radius:8px;font-size:.8em;color:#e65100;font-weight:600">
+          维多利亚小计：770 km / ~12h
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.84em;font-weight:700;color:#2e7d32;margin-bottom:8px">塔斯马尼亚段（Day5–10）</div>
+        <div class="dist-card" style="border-color:#0097a7;margin-bottom:6px">
+          <div class="d-route">Day7 霍巴特↔亚瑟港（往返）</div>
+          <div class="d-nums">200 km · ~3h行驶</div>
+        </div>
+        <div class="dist-card" style="border-color:#2e7d32;margin-bottom:6px">
+          <div class="d-route">Day8 霍巴特→弗雷西内（Coles Bay）</div>
+          <div class="d-nums">206 km · ~2.5h行驶</div>
+        </div>
+        <div class="dist-card" style="border-color:#1b5e20;margin-bottom:6px">
+          <div class="d-route">Day9 Coles Bay→朗塞→摇篮山</div>
+          <div class="d-nums">280 km · ~4h行驶</div>
+        </div>
+        <div class="dist-card" style="border-color:#33691e">
+          <div class="d-route">Day10 摇篮山→霍巴特（还车）</div>
+          <div class="d-nums">180 km · ~2.5h行驶</div>
+        </div>
+        <div style="margin-top:8px;padding:8px 10px;background:#e8f5e9;border-radius:8px;font-size:.8em;color:#2e7d32;font-weight:600">
+          塔州小计：866 km / ~12h
+        </div>
+      </div>
+    </div>
+    <div style="background:#e3f2fd;border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <span style="font-size:.88em;color:#1565c0">两次租车分开（维多利亚段 + 塔州段），不可跨海峡驾车</span>
+      <span style="font-size:1.1em;font-weight:800;color:#0077b6">总计 1,636 km · ~24h</span>
+    </div>
+  </div>
+
+  <!-- Accommodation cost breakdown -->
+  <div class="sec">
+    <h3>🏨 住宿成本逐夜拆解（两人，AUD）</h3>
+    <table>
+      <thead>
+        <tr><th>日期</th><th>地点</th><th>推荐酒店</th><th>特色</th><th>预算（两人/晚）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>4月26日</td><td>墨尔本</td><td>Mantra on Russell</td><td>市区4星，步行可达联邦广场</td><td>AUD 150–250 (¥690–1150)</td></tr>
+        <tr><td>4月27日</td><td>坎贝尔港</td><td>Southern Ocean Motor Inn</td><td>十二门徒旁，可听浪声入眠</td><td>AUD 130–220 (¥600–1010)</td></tr>
+        <tr><td>4月28日</td><td>菲利普岛</td><td>Ramada Phillip Island</td><td>企鹅归巢区步行可达</td><td>AUD 150–280 (¥690–1290)</td></tr>
+        <tr><td>4月29日</td><td>霍巴特</td><td>Henry Jones Art Hotel</td><td>果酱厂改建，艺术精品酒店</td><td>AUD 200–350 (¥920–1610)</td></tr>
+        <tr><td>4月30日</td><td>霍巴特</td><td>（连住）</td><td>同上</td><td>AUD 200–350</td></tr>
+        <tr><td>5月1日</td><td>霍巴特</td><td>（连住）</td><td>同上</td><td>AUD 200–350</td></tr>
+        <tr><td>5月2日</td><td>Coles Bay</td><td>Freycinet Lodge</td><td>国家公园内木屋，晨起鸟鸣</td><td>AUD 250–400 (¥1150–1840)</td></tr>
+        <tr><td>5月3日</td><td>摇篮山</td><td>Peppers Cradle Mountain Lodge ★</td><td>壁炉+露天热水浴缸，最浪漫</td><td>AUD 300–500 (¥1380–2300)</td></tr>
+        <tr><td>5月4日</td><td>—</td><td>深夜航班，无需住宿</td><td>—</td><td>AUD 0</td></tr>
+        <tr>
+          <td colspan="4">住宿合计（9晚，两人）</td>
+          <td><strong>AUD 1,580–2,700 (¥7,270–12,420)</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Key ticket prices -->
+  <div class="sec">
+    <h3>🎫 主要门票 & 体验费用（两人 AUD）</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:.83em">
+      <div style="background:#e8f5e9;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#2e7d32;margin-bottom:4px">🎫 塔州国家公园通票</div>
+        <div style="color:#555">AUD 50/辆·8周有效</div>
+        <div style="color:#2e7d32;font-size:.88em">✓ 摇篮山+酒杯湾+亚瑟港周边全含</div>
+      </div>
+      <div style="background:#fce4ec;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#c62828;margin-bottom:4px">🐧 企鹅归巢（两人）</div>
+        <div style="color:#555">AUD 60–70（标准票）</div>
+        <div style="color:#c62828;font-size:.88em">升级地下台AUD 80–120</div>
+      </div>
+      <div style="background:#e3f2fd;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#1565c0;margin-bottom:4px">🎨 MONA（两人）</div>
+        <div style="color:#555">AUD 70</div>
+        <div style="color:#1565c0;font-size:.88em">含App导览，渡轮另付</div>
+      </div>
+      <div style="background:#fff8e1;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#e65100;margin-bottom:4px">⛓️ 亚瑟港（两人）</div>
+        <div style="color:#555">AUD 90（含港湾游船）</div>
+        <div style="color:#e65100;font-size:.88em">幽灵之旅AUD60额外</div>
+      </div>
+      <div style="background:#f3e5f5;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#7b1fa2;margin-bottom:4px">🚁 直升机十二门徒</div>
+        <div style="color:#555">AUD 390（两人·16分钟）</div>
+        <div style="color:#7b1fa2;font-size:.88em">强烈推荐！需提前预约</div>
+      </div>
+      <div style="background:#e8f5e9;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#2e7d32;margin-bottom:4px">🐨 考拉保育中心</div>
+        <div style="color:#555">AUD 30（两人）</div>
+        <div style="color:#2e7d32;font-size:.88em">菲利普岛内，步道观察</div>
+      </div>
+      <div style="background:#e0f7fa;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#00695c;margin-bottom:4px">🥃 威士忌品鉴</div>
+        <div style="color:#555">AUD 40–80（两人）</div>
+        <div style="color:#00695c;font-size:.88em">Lark / Sullivan's Cove</div>
+      </div>
+      <div style="background:#fce4ec;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;color:#c62828;margin-bottom:4px">👻 幽灵之旅（两人）</div>
+        <div style="color:#555">AUD 60</div>
+        <div style="color:#c62828;font-size:.88em">需提前在官网预约</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Savings tips -->
+  <div style="background:linear-gradient(135deg,#e8f5e9,#e3f2fd);border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.08)">
+    <h3 style="color:#1b5e20;margin-bottom:12px;font-size:1em">💡 省钱5招（实测有效）</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:.82em">
+      <div style="background:white;border-radius:8px;padding:10px 12px">
+        <strong>✈️ 机票提前2个月买</strong><br>
+        <span style="color:#555">南航广州直飞最优，2月底购买可省¥2000–4000/人</span>
+      </div>
+      <div style="background:white;border-radius:8px;padding:10px 12px">
+        <strong>🏛️ 国家公园通票</strong><br>
+        <span style="color:#555">AUD50/辆，覆盖全塔州，不买至少多付AUD130</span>
+      </div>
+      <div style="background:white;border-radius:8px;padding:10px 12px">
+        <strong>🍱 午餐去超市</strong><br>
+        <span style="color:#555">Woolworths/Coles买三明治，每天可省AUD30–50（两人）</span>
+      </div>
+      <div style="background:white;border-radius:8px;padding:10px 12px">
+        <strong>🏷️ e-TAG代替租车高速代缴</strong><br>
+        <span style="color:#555">7-Eleven买AUD5/天，省去租车公司每次AUD10手续费</span>
+      </div>
+      <div style="background:white;border-radius:8px;padding:10px 12px">
+        <strong>🌊 5月淡季红利</strong><br>
+        <span style="color:#555">住宿比旺季省20–40%，热门景点无需排队等人</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
