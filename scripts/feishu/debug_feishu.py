@@ -1,15 +1,30 @@
 #!/usr/bin/env python3
 """调试：逐块找出哪个 block 格式飞书不接受"""
-import json, sys, time, requests, warnings
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+import requests
+import warnings
+
 warnings.filterwarnings("ignore")
-sys.path.insert(0, "/Users/john/trips")
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent.parent
+sys.path.insert(0, str(SCRIPT_DIR))
+
 from feishu_writer import md_to_blocks
 
-APP_ID     = "cli_a202519196b8d00e"
-APP_SECRET = "XOS1FQJRFvHcpbXgXOQgIcYkCUClJyWM"
-DOC        = "DdxNdV9o5owTK7xwtgmcNRq6ntc"
-API        = "https://open.feishu.cn/open-apis"
-MD_FILE    = "/Users/john/trips/澳大利亚大洋路+塔斯马尼亚自驾攻略2026五一.md"
+APP_ID = os.environ.get("FEISHU_APP_ID")
+APP_SECRET = os.environ.get("FEISHU_APP_SECRET")
+DOC = os.environ.get("FEISHU_DOC_TOKEN", "DdxNdV9o5owTK7xwtgmcNRq6ntc")
+API = "https://open.feishu.cn/open-apis"
+MD_FILE = REPO_ROOT / "trips" / "australia-2026-mayday" / "docs" / "itinerary.md"
+
+if not APP_ID or not APP_SECRET:
+    raise SystemExit("请设置 FEISHU_APP_ID 和 FEISHU_APP_SECRET 环境变量")
 
 # 获取 token
 r = requests.post(f"{API}/auth/v3/tenant_access_token/internal",

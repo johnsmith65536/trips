@@ -63,7 +63,7 @@ body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif
 <body>
 <div class="header">
   <h1>🗺️ Google My Maps 路线导入指南</h1>
-  <p>将 trip_route.kml 导入 Google My Maps，在真实卫星地图上查看完整行程路线</p>
+  <p>将 ../exports/route.kml 导入 Google My Maps，在真实卫星地图上查看完整行程路线</p>
 </div>
 
 <div class="container">
@@ -107,7 +107,7 @@ body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif
       <div class="step-desc">
         在左侧图层面板中，点击图层名旁的 <strong>「⋮」（三点菜单）</strong>，选择 <strong>「从文件导入」</strong>。<br><br>
         在弹出的对话框中，点击 <strong>「从电脑选择文件」</strong>，找到并选择：<br>
-        <code>trip_route.kml</code>（在你的 trips 文件夹中）<br><br>
+        <code>../exports/route.kml</code>（位于当前项目的 exports 目录）<br><br>
         点击 <strong>「打开」</strong>，等待导入完成（约5–10秒）。
       </div>
       <div class="tip-box">💡 导入后地图会自动缩放到澳大利亚，显示所有路线和标注点</div>
@@ -214,7 +214,7 @@ body { font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif
     <a href="https://mymaps.google.com" target="_blank" class="action-btn">
       🗺️ 打开 Google My Maps
     </a>
-    <a href="trip_route.kml" download class="action-btn green">
+    <a href="../exports/route.kml" download class="action-btn green">
       ⬇️ 下载 KML 文件
     </a>
     <div class="tip-box" style="margin-top:12px">
