@@ -11,5 +11,5 @@ if [[ -z "${FEISHU_APP_ID:-}" || -z "${FEISHU_APP_SECRET:-}" ]]; then
 fi
 
 python3 "${SCRIPT_DIR}/feishu_writer.py" \
-  "${REPO_ROOT}/trips/qinggan-2026-mayday/docs/executable-guide.md" \
+  "${REPO_ROOT}/trips/qinggan-2026-mayday/docs/qinggan-itinerary-draft-v0.2.md" \
   "https://my.feishu.cn/wiki/YLKJw6h0qiQrM0kFpHic6pYhnBd"
